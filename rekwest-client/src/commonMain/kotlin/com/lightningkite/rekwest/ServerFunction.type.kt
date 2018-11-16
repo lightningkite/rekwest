@@ -14,6 +14,6 @@ val <T> ServerFunction<T>.returnType: Type<T> get() = ServerFunctionReturnType.g
 
 private val ServerFunctionThrows = WeakHashMap<KClass<*>, List<String>?>()
 @Suppress("UNCHECKED_CAST")
-val ServerFunction<*>.throws: List<String>? get() = ServerFunctionThrows.getOrPut(this::class){
-    ClassInfo[this::class].annotations.find { it.name.endsWith("Throws") }?.arguments as? List<String>
+val ServerFunction<*>.throwsTypes: List<String>? get() = ServerFunctionThrows.getOrPut(this::class){
+    ClassInfo[this::class].annotations.find { it.name.endsWith("ThrowsTypes") }?.arguments as? List<String>
 }

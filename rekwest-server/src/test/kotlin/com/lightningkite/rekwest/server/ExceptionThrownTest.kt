@@ -1,15 +1,15 @@
-package com.lightningkite.kotlinx.server.base
+package com.lightningkite.rekwest.server
 
-import com.lightningkite.kotlin.crossplatform.kotlinxServerBaseTestReflections
-import com.lightningkite.kotlinx.exception.ForbiddenException
-import com.lightningkite.kotlinx.exception.stackTraceString
-import com.lightningkite.kotlinx.kotlinxCommonReflections
-import com.lightningkite.kotlinx.reflection.kxReflect
-import com.lightningkite.kotlinx.reflection.kxType
-import com.lightningkite.kotlinx.serialization.CommonSerialization
-import com.lightningkite.kotlinx.serialization.json.JsonSerializer
-import com.lightningkite.kotlinx.server.RemoteExceptionData
-import com.lightningkite.kotlinx.server.ServerFunction
+import com.lightningkite.kommon.exception.ForbiddenException
+import com.lightningkite.kommon.exception.stackTraceString
+import com.lightningkite.mirror.info.type
+import com.lightningkite.mirror.serialization.json.JsonSerializer
+import com.lightningkite.rekwest.RemoteExceptionData
+import com.lightningkite.rekwest.ServerFunction
+import com.lightningkite.rekwest.server.PrincipalWrapper
+import com.lightningkite.rekwest.server.StringSerializerConverter
+import com.lightningkite.rekwest.server.invocation
+import com.lightningkite.rekwest.server.serverFunction
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.auth.Authentication
@@ -32,8 +32,6 @@ import kotlin.test.assertEquals
 class ExceptionThrownTest {
 
     init{
-        kotlinxCommonReflections.forEach { CommonSerialization.ExternalNames.register(it) }
-        kotlinxServerBaseTestReflections.forEach { CommonSerialization.ExternalNames.register(it) }
         ThrowExceptionRequest::class.invocation = {
             println("I'm going to die here.")
             throw ForbiddenException("NOPE")
@@ -71,13 +69,13 @@ class ExceptionThrownTest {
     }){
         println("Beginning test")
         with(handleRequest(HttpMethod.Post, "/function"){
-            val body = JsonSerializer.write(ThrowExceptionRequest(), ServerFunction::class.kxType)
+            val body = JsonSerializer.write(ThrowExceptionRequest(), ServerFunction::class.type)
             println(body)
             this.setBody(body)
         }) {
             println(response.status())
             println(response.content)
-            val out = JsonSerializer.read(response.content ?: "", RemoteExceptionData::class.kxType)
+            val out = JsonSerializer.read(response.content ?: "", RemoteExceptionData::class.type)
             println(out)
         }
     }

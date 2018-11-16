@@ -6,12 +6,13 @@ buildscript {
 
         maven { url "http://dl.bintray.com/kotlin/kotlin-eap" }
         maven { url "http://dl.bintray.com/kotlin/kotlin-dev" }
+        maven { url "https://kotlin.bintray.com/kotlinx" }
         mavenCentral()
         mavenLocal()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
-        classpath 'com.lightningkite.kotlinx:kotlinx-reflect-plugin:1.0.0'
+        classpath "com.lightningkite:mirror-plugin:0.0.2"
     }
 }
 
@@ -19,11 +20,11 @@ group 'com.lightningkite'
 version '0.0.2'
 
 apply plugin: 'kotlin-platform-jvm'
-apply plugin: 'com.lightningkite.kotlinx.reflection'
+apply plugin: 'com.lightningkite.mirror'
 
 
 repositories {
-
+    maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url "https://dl.bintray.com/kotlin/ktor" }
     mavenCentral()
     mavenLocal()
@@ -32,7 +33,13 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     testCompile "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+    compile project(':rekwest-client')
     api "com.lightningkite:kommon-jvm:${project.version}"
+    api "com.lightningkite:mirror-runtime-jvm:${project.version}"
+    api "com.lightningkite:mirror-archive-api-jvm:${project.version}"
+
+    testApi "com.lightningkite:lokalize-jvm:${project.version}"
+    testApi "com.lightningkite:kommon-jvm:${project.version}"
 
     testApi 'junit:junit:4.12'
     testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")

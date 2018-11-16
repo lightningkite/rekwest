@@ -1,39 +1,36 @@
-package com.lightningkite.kotlinx.server.base
+package com.lightningkite.rekwest.server
 
-import com.lightningkite.kotlinx.exception.stackTraceString
-import com.lightningkite.kotlinx.persistence.use
-import com.lightningkite.kotlinx.reflection.*
-import com.lightningkite.kotlinx.server.RemoteExceptionData
-import com.lightningkite.kotlinx.server.ServerFunction
-import com.lightningkite.kotlinx.server.returnType
-import com.lightningkite.kotlinx.server.throws
+import com.lightningkite.kommon.exception.stackTraceString
+import com.lightningkite.mirror.archive.use
+import com.lightningkite.mirror.info.Type
+import com.lightningkite.mirror.info.list
+import com.lightningkite.mirror.info.type
+import com.lightningkite.mirror.info.typeNullable
+import com.lightningkite.rekwest.*
 import io.ktor.application.call
-import io.ktor.application.feature
-import io.ktor.auth.Authentication
-import io.ktor.auth.authenticate
 import io.ktor.http.HttpStatusCode
-import io.ktor.pipeline.ContextDsl
 import io.ktor.routing.Route
-import io.ktor.routing.application
 import io.ktor.routing.post
+import io.ktor.util.pipeline.ContextDsl
 
 
 @ContextDsl
 fun Route.serverFunction(path: String, supressStackTrace: Boolean = true): Route {
     return post(path) { _ ->
         try {
-            val sf = call.receive<ServerFunction<*>>(ServerFunction::class.kxType)
+            val sf = call.receive<ServerFunction<*>>(ServerFunction::class.type)
             try {
                 val result = listOf(sf).transaction(call.unwrappedPrincipal()).use {
-                    sf.invoke(it)!!
+                    sf.invoke(it)
                 }
-                call.respond(sf.returnType, result)
+                @Suppress("UNCHECKED_CAST")
+                call.respond(sf.returnType as Type<Any?>, result)
             } catch (e: Throwable) {
                 e.printStackTrace()
-                val isExpected = sf.throws?.contains(e.javaClass.simpleName) ?: false
+                val isExpected = sf.throwsTypes?.contains(e.javaClass.simpleName) ?: false
                 call.respond(
                         status = if (isExpected) HttpStatusCode.BadRequest else HttpStatusCode.InternalServerError,
-                        type = RemoteExceptionData::class.kxType,
+                        type = RemoteExceptionData::class.type,
                         value = RemoteExceptionData(
                                 type = e.javaClass.simpleName,
                                 message = e.message ?: "",
@@ -53,18 +50,18 @@ fun Route.serverFunction(path: String, supressStackTrace: Boolean = true): Route
 fun Route.serverFunctions(path: String, supressStackTrace: Boolean = true): Route {
     return post(path) { _ ->
         try {
-            val sfs = call.receive<List<ServerFunction<*>>>(ServerFunction::class.kxType.list())
+            val sfs = call.receive(ServerFunction::class.type.list)
             try {
                 val result = sfs.transaction(call.unwrappedPrincipal()).use { txn ->
                     sfs.map { it.invoke(txn) }
                 }
-                call.respond(AnyReflection.kxTypeNullable.list(), result)
+                call.respond(Any::class.typeNullable.list, result)
             } catch (e: Throwable) {
                 e.printStackTrace()
-                val isExpected = sfs.any { sf -> sf.throws?.contains(e.javaClass.simpleName) ?: false }
+                val isExpected = sfs.any { sf -> sf.throwsTypes?.contains(e.javaClass.simpleName) ?: false }
                 call.respond(
                         status = if (isExpected) HttpStatusCode.BadRequest else HttpStatusCode.InternalServerError,
-                        type = RemoteExceptionData::class.kxType,
+                        type = RemoteExceptionData::class.type,
                         value = RemoteExceptionData(
                                 type = e.javaClass.simpleName,
                                 message = e.message ?: "",

@@ -1,4 +1,4 @@
-package com.lightningkite.kotlinx.server.base
+package com.lightningkite.rekwest.server
 
 import io.ktor.application.ApplicationCall
 import io.ktor.auth.Principal

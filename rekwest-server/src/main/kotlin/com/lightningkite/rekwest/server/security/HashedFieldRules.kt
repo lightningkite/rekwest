@@ -1,8 +1,8 @@
-package com.lightningkite.kotlinx.server.base.security
+package com.lightningkite.rekwest.server.security
 
-import com.lightningkite.kotlinx.persistence.Model
-import com.lightningkite.kotlinx.reflection.KxField
-import com.lightningkite.kotlinx.reflection.KxVariable
+import com.lightningkite.mirror.archive.Model
+import com.lightningkite.mirror.archive.secure.PropertySecureTable
+import com.lightningkite.mirror.info.SerializedFieldInfo
 import de.mkammerer.argon2.Argon2Factory
 import me.gosimple.nbvcxz.Nbvcxz
 import me.gosimple.nbvcxz.resources.ConfigurationBuilder
@@ -10,7 +10,7 @@ import me.gosimple.nbvcxz.resources.DictionaryBuilder
 import java.lang.IllegalArgumentException
 
 class HashedFieldRules<T : Model<*>>(
-        override val variable: KxVariable<T, String>,
+        override val variable: SerializedFieldInfo<T, String>,
         val getIdentifiers: (T)->List<String>,
         val atLeastEntropy: (T?)->Int = { 30 /*Takes roughly a billion guesses*/ }
 ) : PropertySecureTable.PropertyRules<T, String> {
@@ -24,9 +24,8 @@ class HashedFieldRules<T : Model<*>>(
 
     override suspend fun query(untypedUser: Any?) { throw IllegalAccessException() }
 
-    override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: T): Boolean {
-        variable.set.invoke(currentState, HASHED_PLACEHOLDER)
-        return true
+    override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: T): String {
+        return HASHED_PLACEHOLDER
     }
 
     override suspend fun write(untypedUser: Any?, currentState: T?, newState: String): String {

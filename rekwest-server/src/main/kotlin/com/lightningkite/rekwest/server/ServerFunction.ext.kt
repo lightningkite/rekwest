@@ -1,8 +1,8 @@
-package com.lightningkite.kotlinx.server.base
+package com.lightningkite.rekwest.server
 
-import com.lightningkite.kotlinx.persistence.Transaction
-import com.lightningkite.kotlinx.reflection.kxReflect
-import com.lightningkite.kotlinx.server.ServerFunction
+import com.lightningkite.mirror.archive.Transaction
+import com.lightningkite.mirror.info.ClassInfo
+import com.lightningkite.rekwest.ServerFunction
 import java.util.*
 import kotlin.reflect.KClass
 
@@ -13,7 +13,7 @@ var KClass<out ServerFunction<*>>.requiresWrite: Boolean
     }
     get() {
         return KClassServerFunction_RequiresWrite.getOrPut(this){
-            this.kxReflect.annotations.any { it.name.endsWith("Mutates") }
+            ClassInfo[this].annotations.any { it.name.endsWith("Mutates") }
         }
     }
 
@@ -24,7 +24,7 @@ var KClass<out ServerFunction<*>>.requiresAtomicTransaction: Boolean
     }
     get() {
         return KClassServerFunction_RequiresAtomicTransaction.getOrPut(this){
-            this.kxReflect.annotations.any { it.name.endsWith("RequiresAtomicTransaction") }
+            ClassInfo[this].annotations.any { it.name.endsWith("RequiresAtomicTransaction") }
         }
     }
 
