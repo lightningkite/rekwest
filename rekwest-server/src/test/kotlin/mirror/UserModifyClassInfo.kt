@@ -28,16 +28,16 @@ object UserModifyClassInfo: ClassInfo<User.Modify> {
    override val enumValues: List<User.Modify>? = null
 
    object Fields {
-       val id = SerializedFieldInfo<User.Modify, Reference<User,Long>>(UserModifyClassInfo, "id", Type<Reference<User,Long>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User,Long>}, listOf())
-        val modifications = SerializedFieldInfo<User.Modify, List<ModificationOnItem<User,Any?>>>(UserModifyClassInfo, "modifications", Type<List<ModificationOnItem<User,Any?>>>(List::class, listOf(TypeProjection(Type<ModificationOnItem<User,Any?>>(ModificationOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.modifications as List<ModificationOnItem<User,Any?>>}, listOf())
+       val id = SerializedFieldInfo<User.Modify, Reference<User, Long>>(UserModifyClassInfo, "id", Type<Reference<User, Long>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User, Long>}, listOf())
+        val modifications = SerializedFieldInfo<User.Modify, List<ModificationOnItem<User, *>>>(UserModifyClassInfo, "modifications", Type<List<ModificationOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<ModificationOnItem<User, *>>(ModificationOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.modifications as List<ModificationOnItem<User, *>>}, listOf())
    }
 
    override val fields:List<SerializedFieldInfo<User.Modify, *>> = listOf(Fields.id, Fields.modifications)
 
    override fun construct(map: Map<String, Any?>): User.Modify {
        //Gather variables
-       val id:Reference<User,Long> = map["id"] as Reference<User,Long>
-        val modifications:List<ModificationOnItem<User,Any?>> = map["modifications"] as List<ModificationOnItem<User,Any?>>
+       val id:Reference<User, Long> = map["id"] as Reference<User, Long>
+        val modifications:List<ModificationOnItem<User, *>> = map["modifications"] as List<ModificationOnItem<User, *>>
            //Handle the optionals
        
        //Finally do the call

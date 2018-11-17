@@ -17,7 +17,7 @@ object UserInsertClassInfo: ClassInfo<User.Insert> {
    override val kClass: KClass<User.Insert> = User.Insert::class
    override val modifiers: List<ClassInfo.Modifier> = listOf()
 
-   override val implements: List<Type<*>> = listOf(Type<ServerFunction<Session>>(ServerFunction::class, listOf(TypeProjection(Type<Session>(Session::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false))
+   override val implements: List<Type<*>> = listOf(Type<ServerFunction<User.Session>>(ServerFunction::class, listOf(TypeProjection(Type<User.Session>(User.Session::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false))
 
    override val packageName: String = "com.lightningkite.rekwest.server"
    override val owner: KClass<*>? = User::class

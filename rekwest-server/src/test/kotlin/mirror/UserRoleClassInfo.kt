@@ -25,7 +25,7 @@ object UserRoleClassInfo: ClassInfo<User.Role> {
 
    override val name: String = "Role"
    override val annotations: List<AnnotationInfo> = listOf()
-   override val enumValues: List<User.Role>? = listOf(Admin, Citizen)
+   override val enumValues: List<User.Role>? = listOf(User.Role.Admin, User.Role.Citizen)
 
    object Fields {
        
@@ -33,15 +33,6 @@ object UserRoleClassInfo: ClassInfo<User.Role> {
 
    override val fields:List<SerializedFieldInfo<User.Role, *>> = listOf()
 
-   override fun construct(map: Map<String, Any?>): User.Role {
-       //Gather variables
-       
-           //Handle the optionals
-       
-       //Finally do the call
-       return User.Role(
-           
-       )
-   }
+   override fun construct(map: Map<String, Any?>): User.Role = throw NotImplementedError()
 
 }

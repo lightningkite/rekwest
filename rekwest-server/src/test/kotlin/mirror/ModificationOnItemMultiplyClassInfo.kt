@@ -22,20 +22,20 @@ object ModificationOnItemMultiplyClassInfo: ClassInfo<ModificationOnItem.Multipl
    override val enumValues: List<ModificationOnItem.Multiply<*,*>>? = null
 
    object Fields {
-       val field = SerializedFieldInfo<ModificationOnItem.Multiply<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Number>>(ModificationOnItemMultiplyClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Number>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Number>(kotlin.Number::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Number>}, listOf())
+       val field = SerializedFieldInfo<ModificationOnItem.Multiply<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Number>>(ModificationOnItemMultiplyClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Number>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Number>(kotlin.Number::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Number>}, listOf())
         val amount = SerializedFieldInfo<ModificationOnItem.Multiply<*,*>, kotlin.Number>(ModificationOnItemMultiplyClassInfo, "amount", Type<kotlin.Number>(kotlin.Number::class, listOf(), false), false, { it.amount as kotlin.Number}, listOf())
    }
 
    override val fields:List<SerializedFieldInfo<ModificationOnItem.Multiply<*,*>, *>> = listOf(Fields.field, Fields.amount)
 
-   override fun construct(map: Map<String, Any?>): ModificationOnItem.Multiply<kotlin.Any,kotlin.Number> {
+   override fun construct(map: Map<String, Any?>): ModificationOnItem.Multiply<kotlin.Any, kotlin.Number> {
        //Gather variables
-       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Number> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Number>
+       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Number> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Number>
         val amount:kotlin.Number = map["amount"] as kotlin.Number
            //Handle the optionals
        
        //Finally do the call
-       return ModificationOnItem.Multiply<kotlin.Any,kotlin.Number>(
+       return ModificationOnItem.Multiply<kotlin.Any, kotlin.Number>(
            field = field,
             amount = amount
        )

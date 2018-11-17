@@ -31,7 +31,7 @@ object UserClassInfo: ClassInfo<User> {
        val id = SerializedFieldInfo<User, Long?>(UserClassInfo, "id", Type<Long?>(Long::class, listOf(), true), false, { it.id as Long?}, listOf())
         val email = SerializedFieldInfo<User, String>(UserClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf(AnnotationInfo("Indexed", listOf())))
         val password = SerializedFieldInfo<User, String>(UserClassInfo, "password", Type<String>(String::class, listOf(), false), false, { it.password as String}, listOf())
-        val role = SerializedFieldInfo<User, Role>(UserClassInfo, "role", Type<Role>(Role::class, listOf(), false), false, { it.role as Role}, listOf())
+        val role = SerializedFieldInfo<User, User.Role>(UserClassInfo, "role", Type<User.Role>(User.Role::class, listOf(), false), false, { it.role as User.Role}, listOf())
         val rejectTokensBefore = SerializedFieldInfo<User, TimeStamp>(UserClassInfo, "rejectTokensBefore", Type<TimeStamp>(TimeStamp::class, listOf(), false), false, { it.rejectTokensBefore as TimeStamp}, listOf())
    }
 
@@ -42,7 +42,7 @@ object UserClassInfo: ClassInfo<User> {
        val id:Long? = map["id"] as Long?
         val email:String = map["email"] as String
         val password:String = map["password"] as String
-        val role:Role = map["role"] as Role
+        val role:User.Role = map["role"] as User.Role
         val rejectTokensBefore:TimeStamp = map["rejectTokensBefore"] as TimeStamp
            //Handle the optionals
        

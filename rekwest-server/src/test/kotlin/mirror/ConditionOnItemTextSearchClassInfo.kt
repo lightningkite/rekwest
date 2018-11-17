@@ -22,20 +22,20 @@ object ConditionOnItemTextSearchClassInfo: ClassInfo<ConditionOnItem.TextSearch<
    override val enumValues: List<ConditionOnItem.TextSearch<*,*>>? = null
 
    object Fields {
-       val field = SerializedFieldInfo<ConditionOnItem.TextSearch<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>>(ConditionOnItemTextSearchClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>}, listOf())
+       val field = SerializedFieldInfo<ConditionOnItem.TextSearch<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>>(ConditionOnItemTextSearchClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>}, listOf())
         val query = SerializedFieldInfo<ConditionOnItem.TextSearch<*,*>, kotlin.String>(ConditionOnItemTextSearchClassInfo, "query", Type<kotlin.String>(kotlin.String::class, listOf(), false), false, { it.query as kotlin.String}, listOf())
    }
 
    override val fields:List<SerializedFieldInfo<ConditionOnItem.TextSearch<*,*>, *>> = listOf(Fields.field, Fields.query)
 
-   override fun construct(map: Map<String, Any?>): ConditionOnItem.TextSearch<kotlin.Any,kotlin.CharSequence> {
+   override fun construct(map: Map<String, Any?>): ConditionOnItem.TextSearch<kotlin.Any, kotlin.CharSequence> {
        //Gather variables
-       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>
+       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>
         val query:kotlin.String = map["query"] as kotlin.String
            //Handle the optionals
        
        //Finally do the call
-       return ConditionOnItem.TextSearch<kotlin.Any,kotlin.CharSequence>(
+       return ConditionOnItem.TextSearch<kotlin.Any, kotlin.CharSequence>(
            field = field,
             query = query
        )

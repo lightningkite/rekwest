@@ -22,20 +22,20 @@ object ConditionOnItemGreaterThanOrEqualClassInfo: ClassInfo<ConditionOnItem.Gre
    override val enumValues: List<ConditionOnItem.GreaterThanOrEqual<*,*>>? = null
 
    object Fields {
-       val field = SerializedFieldInfo<ConditionOnItem.GreaterThanOrEqual<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Comparable<kotlin.Comparable<*>>>>(ConditionOnItemGreaterThanOrEqualClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Comparable<kotlin.Comparable<*>>>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Comparable<kotlin.Comparable<*>>>(kotlin.Comparable::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Comparable<kotlin.Comparable<*>>>}, listOf())
+       val field = SerializedFieldInfo<ConditionOnItem.GreaterThanOrEqual<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(ConditionOnItemGreaterThanOrEqualClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Comparable<kotlin.Comparable<*>>>(kotlin.Comparable::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>}, listOf())
         val value = SerializedFieldInfo<ConditionOnItem.GreaterThanOrEqual<*,*>, kotlin.Comparable<kotlin.Comparable<*>>>(ConditionOnItemGreaterThanOrEqualClassInfo, "value", Type<kotlin.Comparable<kotlin.Comparable<*>>>(kotlin.Comparable::class, listOf(), false), false, { it.value as kotlin.Comparable<kotlin.Comparable<*>>}, listOf())
    }
 
    override val fields:List<SerializedFieldInfo<ConditionOnItem.GreaterThanOrEqual<*,*>, *>> = listOf(Fields.field, Fields.value)
 
-   override fun construct(map: Map<String, Any?>): ConditionOnItem.GreaterThanOrEqual<kotlin.Any,kotlin.Comparable<kotlin.Comparable<*>>> {
+   override fun construct(map: Map<String, Any?>): ConditionOnItem.GreaterThanOrEqual<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>> {
        //Gather variables
-       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Comparable<kotlin.Comparable<*>>> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.Comparable<kotlin.Comparable<*>>>
+       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>
         val value:kotlin.Comparable<kotlin.Comparable<*>> = map["value"] as kotlin.Comparable<kotlin.Comparable<*>>
            //Handle the optionals
        
        //Finally do the call
-       return ConditionOnItem.GreaterThanOrEqual<kotlin.Any,kotlin.Comparable<kotlin.Comparable<*>>>(
+       return ConditionOnItem.GreaterThanOrEqual<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(
            field = field,
             value = value
        )

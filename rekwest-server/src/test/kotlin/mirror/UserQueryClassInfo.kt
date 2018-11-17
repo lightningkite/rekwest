@@ -29,7 +29,7 @@ object UserQueryClassInfo: ClassInfo<User.Query> {
 
    object Fields {
        val condition = SerializedFieldInfo<User.Query, ConditionOnItem<User>>(UserQueryClassInfo, "condition", Type<ConditionOnItem<User>>(ConditionOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.condition as ConditionOnItem<User>}, listOf())
-        val sortedBy = SerializedFieldInfo<User.Query, List<SortOnItem<User,Any?>>>(UserQueryClassInfo, "sortedBy", Type<List<SortOnItem<User,Any?>>>(List::class, listOf(TypeProjection(Type<SortOnItem<User,Any?>>(SortOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.sortedBy as List<SortOnItem<User,Any?>>}, listOf())
+        val sortedBy = SerializedFieldInfo<User.Query, List<SortOnItem<User, *>>>(UserQueryClassInfo, "sortedBy", Type<List<SortOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<SortOnItem<User, *>>(SortOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.sortedBy as List<SortOnItem<User, *>>}, listOf())
         val continuationToken = SerializedFieldInfo<User.Query, String?>(UserQueryClassInfo, "continuationToken", Type<String?>(String::class, listOf(), true), false, { it.continuationToken as String?}, listOf())
         val count = SerializedFieldInfo<User.Query, Int>(UserQueryClassInfo, "count", Type<Int>(Int::class, listOf(), false), false, { it.count as Int}, listOf())
    }
@@ -39,7 +39,7 @@ object UserQueryClassInfo: ClassInfo<User.Query> {
    override fun construct(map: Map<String, Any?>): User.Query {
        //Gather variables
        val condition:ConditionOnItem<User> = map["condition"] as ConditionOnItem<User>
-        val sortedBy:List<SortOnItem<User,Any?>> = map["sortedBy"] as List<SortOnItem<User,Any?>>
+        val sortedBy:List<SortOnItem<User, *>> = map["sortedBy"] as List<SortOnItem<User, *>>
         val continuationToken:String? = map["continuationToken"] as String?
         val count:Int = map["count"] as Int
            //Handle the optionals

@@ -22,20 +22,20 @@ object ConditionOnItemRegexTextSearchClassInfo: ClassInfo<ConditionOnItem.RegexT
    override val enumValues: List<ConditionOnItem.RegexTextSearch<*,*>>? = null
 
    object Fields {
-       val field = SerializedFieldInfo<ConditionOnItem.RegexTextSearch<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>>(ConditionOnItemRegexTextSearchClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>}, listOf())
+       val field = SerializedFieldInfo<ConditionOnItem.RegexTextSearch<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>>(ConditionOnItemRegexTextSearchClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>}, listOf())
         val query = SerializedFieldInfo<ConditionOnItem.RegexTextSearch<*,*>, kotlin.text.Regex>(ConditionOnItemRegexTextSearchClassInfo, "query", Type<kotlin.text.Regex>(kotlin.text.Regex::class, listOf(), false), false, { it.query as kotlin.text.Regex}, listOf())
    }
 
    override val fields:List<SerializedFieldInfo<ConditionOnItem.RegexTextSearch<*,*>, *>> = listOf(Fields.field, Fields.query)
 
-   override fun construct(map: Map<String, Any?>): ConditionOnItem.RegexTextSearch<kotlin.Any,kotlin.CharSequence> {
+   override fun construct(map: Map<String, Any?>): ConditionOnItem.RegexTextSearch<kotlin.Any, kotlin.CharSequence> {
        //Gather variables
-       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,kotlin.CharSequence>
+       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.CharSequence>
         val query:kotlin.text.Regex = map["query"] as kotlin.text.Regex
            //Handle the optionals
        
        //Finally do the call
-       return ConditionOnItem.RegexTextSearch<kotlin.Any,kotlin.CharSequence>(
+       return ConditionOnItem.RegexTextSearch<kotlin.Any, kotlin.CharSequence>(
            field = field,
             query = query
        )

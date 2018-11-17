@@ -13,7 +13,7 @@ data class User(
         override var id: Long? = null,
         @Indexed var email: String,
         var password: String,
-        var role: Role = Role.Citizen,
+        var role: User.Role = User.Role.Citizen,
         var rejectTokensBefore: TimeStamp = TimeStamp(0)
 ) : Model<Long> {
 
@@ -45,7 +45,7 @@ data class User(
 
     @Mutates
     @ThrowsTypes(ExceptionNames.ForbiddenException)
-    class Insert(val value: User) : ServerFunction<Session>
+    class Insert(val value: User) : ServerFunction<User.Session>
 
 
     @Mutates
@@ -77,7 +77,7 @@ data class User(
 
 
     @ThrowsTypes(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)
-    class Login(val email: String, val password: String) : ServerFunction<Session>
+    class Login(val email: String, val password: String) : ServerFunction<User.Session>
 
     //endregion
 }

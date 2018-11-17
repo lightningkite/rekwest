@@ -32,6 +32,7 @@ import kotlin.test.assertEquals
 class ExceptionThrownTest {
 
     init{
+        configureAutoMirror()
         ThrowExceptionRequest::class.invocation = {
             println("I'm going to die here.")
             throw ForbiddenException("NOPE")

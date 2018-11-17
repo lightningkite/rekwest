@@ -28,7 +28,7 @@ suspend fun <T> ServerFunction<T>.invoke(
         }
         try {
             @Suppress("UNCHECKED_CAST")
-            serializer.read(it.result!!, this.returnType) as T
+            serializer.read(it.result!!, this.returnType)
         } catch (e: Exception) {
             throw SerializationException("Failed to read $it", e)
         }
@@ -51,7 +51,7 @@ suspend fun <T> ServerFunction<T>.invoke(
         }
         try {
             @Suppress("UNCHECKED_CAST")
-            serializer.read(it.result!!, this.returnType) as T
+            serializer.read(it.result!!, this.returnType)
         } catch (e: Exception) {
             throw SerializationException("Failed to read $it", e)
         }

@@ -4,7 +4,9 @@
     import kotlin.reflect.KClass
 
     fun configureAutoMirror(){
-        ClassInfo.register(com.lightningkite.rekwest.server.UserClassInfo)
+        ClassInfo.register(com.lightningkite.rekwest.RemoteExceptionDataClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.ThrowExceptionRequestClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserClassInfo)
 ClassInfo.register(com.lightningkite.rekwest.server.UserRoleClassInfo)
 ClassInfo.register(com.lightningkite.rekwest.server.UserSessionClassInfo)
 ClassInfo.register(com.lightningkite.rekwest.server.UserGetClassInfo)

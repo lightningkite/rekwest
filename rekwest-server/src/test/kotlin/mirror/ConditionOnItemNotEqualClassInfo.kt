@@ -22,20 +22,20 @@ object ConditionOnItemNotEqualClassInfo: ClassInfo<ConditionOnItem.NotEqual<*,*>
    override val enumValues: List<ConditionOnItem.NotEqual<*,*>>? = null
 
    object Fields {
-       val field = SerializedFieldInfo<ConditionOnItem.NotEqual<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,Any?>>(ConditionOnItemNotEqualClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,Any?>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,Any?>}, listOf())
+       val field = SerializedFieldInfo<ConditionOnItem.NotEqual<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>>(ConditionOnItemNotEqualClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>}, listOf())
         val value = SerializedFieldInfo<ConditionOnItem.NotEqual<*,*>, Any?>(ConditionOnItemNotEqualClassInfo, "value", Type<Any?>(Any::class, listOf(), false), false, { it.value as Any?}, listOf())
    }
 
    override val fields:List<SerializedFieldInfo<ConditionOnItem.NotEqual<*,*>, *>> = listOf(Fields.field, Fields.value)
 
-   override fun construct(map: Map<String, Any?>): ConditionOnItem.NotEqual<kotlin.Any,Any?> {
+   override fun construct(map: Map<String, Any?>): ConditionOnItem.NotEqual<kotlin.Any, Any?> {
        //Gather variables
-       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,Any?> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any,Any?>
+       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>
         val value:Any? = map["value"] as Any?
            //Handle the optionals
        
        //Finally do the call
-       return ConditionOnItem.NotEqual<kotlin.Any,Any?>(
+       return ConditionOnItem.NotEqual<kotlin.Any, Any?>(
            field = field,
             value = value
        )
