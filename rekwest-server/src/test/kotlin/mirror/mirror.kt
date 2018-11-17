@@ -1,0 +1,41 @@
+    package com.lightningkite.rekwest.server
+
+    import com.lightningkite.mirror.info.*
+    import kotlin.reflect.KClass
+
+    fun configureAutoMirror(){
+        ClassInfo.register(com.lightningkite.rekwest.server.UserClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserRoleClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserSessionClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserGetClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserInsertClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserUpdateClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserModifyClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserQueryClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserDeleteClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserResetPasswordClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.server.UserLoginClassInfo)
+ClassInfo.register(com.lightningkite.rekwest.ServerFunctionClassInfo)
+ClassInfo.register(com.lightningkite.lokalize.TimeStampClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemNeverClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemAlwaysClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemAndClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemOrClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemNotClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemEqualClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemEqualToOneClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemNotEqualClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemLessThanClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemGreaterThanClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemLessThanOrEqualClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemGreaterThanOrEqualClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemTextSearchClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ConditionOnItemRegexTextSearchClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ModificationOnItemClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ModificationOnItemSetClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ModificationOnItemAddClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.ModificationOnItemMultiplyClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.SortOnItemClassInfo)
+ClassInfo.register(com.lightningkite.mirror.archive.QueryResultClassInfo)
+    }
