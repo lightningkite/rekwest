@@ -22,15 +22,15 @@ object ModificationOnItemSetClassInfo: ClassInfo<ModificationOnItem.Set<*,*>> {
    override val enumValues: List<ModificationOnItem.Set<*,*>>? = null
 
    object Fields {
-       val field = SerializedFieldInfo<ModificationOnItem.Set<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>>(ModificationOnItemSetClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>}, listOf())
-        val value = SerializedFieldInfo<ModificationOnItem.Set<*,*>, Any?>(ModificationOnItemSetClassInfo, "value", Type<Any?>(Any::class, listOf(), false), false, { it.value as Any?}, listOf())
+       val field = FieldInfo<ModificationOnItem.Set<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(ModificationOnItemSetClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>}, listOf())
+        val value = FieldInfo<ModificationOnItem.Set<*,*>, Any?>(ModificationOnItemSetClassInfo, "value", Type<Any?>(Any::class, listOf(), false), false, { it.value as Any?}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<ModificationOnItem.Set<*,*>, *>> = listOf(Fields.field, Fields.value)
+   override val fields:List<FieldInfo<ModificationOnItem.Set<*,*>, *>> = listOf(Fields.field, Fields.value)
 
    override fun construct(map: Map<String, Any?>): ModificationOnItem.Set<kotlin.Any, Any?> {
        //Gather variables
-       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, Any?>
+       val field:com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?> = map["field"] as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>
         val value:Any? = map["value"] as Any?
            //Handle the optionals
        

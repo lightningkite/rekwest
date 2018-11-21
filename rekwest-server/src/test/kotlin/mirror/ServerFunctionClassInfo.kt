@@ -25,7 +25,7 @@ object ServerFunctionClassInfo: ClassInfo<ServerFunction<*>> {
        
    }
 
-   override val fields:List<SerializedFieldInfo<ServerFunction<*>, *>> = listOf()
+   override val fields:List<FieldInfo<ServerFunction<*>, *>> = listOf()
 
    override fun construct(map: Map<String, Any?>): ServerFunction<Any?> = throw NotImplementedError()
 

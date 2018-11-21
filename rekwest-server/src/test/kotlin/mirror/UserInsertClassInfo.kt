@@ -28,10 +28,10 @@ object UserInsertClassInfo: ClassInfo<User.Insert> {
    override val enumValues: List<User.Insert>? = null
 
    object Fields {
-       val value = SerializedFieldInfo<User.Insert, User>(UserInsertClassInfo, "value", Type<User>(User::class, listOf(), false), false, { it.value as User}, listOf())
+       val value = FieldInfo<User.Insert, User>(UserInsertClassInfo, "value", Type<User>(User::class, listOf(), false), false, { it.value as User}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<User.Insert, *>> = listOf(Fields.value)
+   override val fields:List<FieldInfo<User.Insert, *>> = listOf(Fields.value)
 
    override fun construct(map: Map<String, Any?>): User.Insert {
        //Gather variables

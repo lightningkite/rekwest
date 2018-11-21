@@ -28,13 +28,13 @@ object UserQueryClassInfo: ClassInfo<User.Query> {
    override val enumValues: List<User.Query>? = null
 
    object Fields {
-       val condition = SerializedFieldInfo<User.Query, ConditionOnItem<User>>(UserQueryClassInfo, "condition", Type<ConditionOnItem<User>>(ConditionOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.condition as ConditionOnItem<User>}, listOf())
-        val sortedBy = SerializedFieldInfo<User.Query, List<SortOnItem<User, *>>>(UserQueryClassInfo, "sortedBy", Type<List<SortOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<SortOnItem<User, *>>(SortOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.sortedBy as List<SortOnItem<User, *>>}, listOf())
-        val continuationToken = SerializedFieldInfo<User.Query, String?>(UserQueryClassInfo, "continuationToken", Type<String?>(String::class, listOf(), true), false, { it.continuationToken as String?}, listOf())
-        val count = SerializedFieldInfo<User.Query, Int>(UserQueryClassInfo, "count", Type<Int>(Int::class, listOf(), false), false, { it.count as Int}, listOf())
+       val condition = FieldInfo<User.Query, ConditionOnItem<User>>(UserQueryClassInfo, "condition", Type<ConditionOnItem<User>>(ConditionOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.condition as ConditionOnItem<User>}, listOf())
+        val sortedBy = FieldInfo<User.Query, List<SortOnItem<User, *>>>(UserQueryClassInfo, "sortedBy", Type<List<SortOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<SortOnItem<User, *>>(SortOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.sortedBy as List<SortOnItem<User, *>>}, listOf())
+        val continuationToken = FieldInfo<User.Query, String?>(UserQueryClassInfo, "continuationToken", Type<String?>(String::class, listOf(), true), false, { it.continuationToken as String?}, listOf())
+        val count = FieldInfo<User.Query, Int>(UserQueryClassInfo, "count", Type<Int>(Int::class, listOf(), false), false, { it.count as Int}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<User.Query, *>> = listOf(Fields.condition, Fields.sortedBy, Fields.continuationToken, Fields.count)
+   override val fields:List<FieldInfo<User.Query, *>> = listOf(Fields.condition, Fields.sortedBy, Fields.continuationToken, Fields.count)
 
    override fun construct(map: Map<String, Any?>): User.Query {
        //Gather variables

@@ -22,16 +22,16 @@ object SortOnItemClassInfo: ClassInfo<SortOnItem<*,*>> {
    override val enumValues: List<SortOnItem<*,*>>? = null
 
    object Fields {
-       val field = SerializedFieldInfo<SortOnItem<*,*>, com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(SortOnItemClassInfo, "field", Type<com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(com.lightningkite.mirror.info.SerializedFieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Comparable<kotlin.Comparable<*>>>(kotlin.Comparable::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>}, listOf())
-        val ascending = SerializedFieldInfo<SortOnItem<*,*>, kotlin.Boolean>(SortOnItemClassInfo, "ascending", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.ascending as kotlin.Boolean}, listOf())
-        val nullsFirst = SerializedFieldInfo<SortOnItem<*,*>, kotlin.Boolean>(SortOnItemClassInfo, "nullsFirst", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.nullsFirst as kotlin.Boolean}, listOf())
+       val field = FieldInfo<SortOnItem<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(SortOnItemClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Comparable<kotlin.Comparable<*>>>(kotlin.Comparable::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>}, listOf())
+        val ascending = FieldInfo<SortOnItem<*,*>, kotlin.Boolean>(SortOnItemClassInfo, "ascending", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.ascending as kotlin.Boolean}, listOf())
+        val nullsFirst = FieldInfo<SortOnItem<*,*>, kotlin.Boolean>(SortOnItemClassInfo, "nullsFirst", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.nullsFirst as kotlin.Boolean}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<SortOnItem<*,*>, *>> = listOf(Fields.field, Fields.ascending, Fields.nullsFirst)
+   override val fields:List<FieldInfo<SortOnItem<*,*>, *>> = listOf(Fields.field, Fields.ascending, Fields.nullsFirst)
 
    override fun construct(map: Map<String, Any?>): SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>> {
        //Gather variables
-       val field:com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>> = map["field"] as com.lightningkite.mirror.info.SerializedFieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>
+       val field:com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>> = map["field"] as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>
            //Handle the optionals
        val ascending:kotlin.Boolean = map["ascending"] as? kotlin.Boolean ?: (Fields.ascending.get(SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(field = field)) as kotlin.Boolean)
         val nullsFirst:kotlin.Boolean = map["nullsFirst"] as? kotlin.Boolean ?: (Fields.nullsFirst.get(SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(field = field, ascending = ascending)) as kotlin.Boolean)

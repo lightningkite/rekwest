@@ -22,10 +22,10 @@ object ConditionOnItemAndClassInfo: ClassInfo<ConditionOnItem.And<*>> {
    override val enumValues: List<ConditionOnItem.And<*>>? = null
 
    object Fields {
-       val conditions = SerializedFieldInfo<ConditionOnItem.And<*>, kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(ConditionOnItemAndClassInfo, "conditions", Type<kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(kotlin.collections.List::class, listOf(TypeProjection(Type<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(com.lightningkite.mirror.archive.ConditionOnItem::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.conditions as kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>}, listOf())
+       val conditions = FieldInfo<ConditionOnItem.And<*>, kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(ConditionOnItemAndClassInfo, "conditions", Type<kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(kotlin.collections.List::class, listOf(TypeProjection(Type<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(com.lightningkite.mirror.archive.ConditionOnItem::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.conditions as kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<ConditionOnItem.And<*>, *>> = listOf(Fields.conditions)
+   override val fields:List<FieldInfo<ConditionOnItem.And<*>, *>> = listOf(Fields.conditions)
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.And<kotlin.Any> {
        //Gather variables

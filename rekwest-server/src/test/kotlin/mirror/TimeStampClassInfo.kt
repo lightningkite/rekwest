@@ -22,10 +22,10 @@ object TimeStampClassInfo: ClassInfo<TimeStamp> {
    override val enumValues: List<TimeStamp>? = null
 
    object Fields {
-       val millisecondsSinceEpoch = SerializedFieldInfo<TimeStamp, kotlin.Long>(TimeStampClassInfo, "millisecondsSinceEpoch", Type<kotlin.Long>(kotlin.Long::class, listOf(), false), false, { it.millisecondsSinceEpoch as kotlin.Long}, listOf())
+       val millisecondsSinceEpoch = FieldInfo<TimeStamp, kotlin.Long>(TimeStampClassInfo, "millisecondsSinceEpoch", Type<kotlin.Long>(kotlin.Long::class, listOf(), false), false, { it.millisecondsSinceEpoch as kotlin.Long}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<TimeStamp, *>> = listOf(Fields.millisecondsSinceEpoch)
+   override val fields:List<FieldInfo<TimeStamp, *>> = listOf(Fields.millisecondsSinceEpoch)
 
    override fun construct(map: Map<String, Any?>): TimeStamp {
        //Gather variables

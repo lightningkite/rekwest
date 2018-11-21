@@ -22,11 +22,11 @@ object QueryResultClassInfo: ClassInfo<QueryResult<*>> {
    override val enumValues: List<QueryResult<*>>? = null
 
    object Fields {
-       val results = SerializedFieldInfo<QueryResult<*>, kotlin.collections.List<Any?>>(QueryResultClassInfo, "results", Type<kotlin.collections.List<Any?>>(kotlin.collections.List::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.results as kotlin.collections.List<Any?>}, listOf())
-        val continuationToken = SerializedFieldInfo<QueryResult<*>, kotlin.String?>(QueryResultClassInfo, "continuationToken", Type<kotlin.String?>(kotlin.String::class, listOf(), true), true, { it.continuationToken as kotlin.String?}, listOf())
+       val results = FieldInfo<QueryResult<*>, kotlin.collections.List<Any?>>(QueryResultClassInfo, "results", Type<kotlin.collections.List<Any?>>(kotlin.collections.List::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.results as kotlin.collections.List<Any?>}, listOf())
+        val continuationToken = FieldInfo<QueryResult<*>, kotlin.String?>(QueryResultClassInfo, "continuationToken", Type<kotlin.String?>(kotlin.String::class, listOf(), true), true, { it.continuationToken as kotlin.String?}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<QueryResult<*>, *>> = listOf(Fields.results, Fields.continuationToken)
+   override val fields:List<FieldInfo<QueryResult<*>, *>> = listOf(Fields.results, Fields.continuationToken)
 
    override fun construct(map: Map<String, Any?>): QueryResult<Any?> {
        //Gather variables

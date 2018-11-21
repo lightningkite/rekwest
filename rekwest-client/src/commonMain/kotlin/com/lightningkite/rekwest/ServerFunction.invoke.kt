@@ -6,6 +6,7 @@ import com.lightningkite.kommunicate.HttpException
 import com.lightningkite.kommunicate.HttpMethod
 import com.lightningkite.mirror.info.Type
 import com.lightningkite.mirror.info.TypeProjection
+import com.lightningkite.mirror.info.allImplements
 import com.lightningkite.mirror.info.type
 import com.lightningkite.mirror.serialization.ByteArraySerializer
 import com.lightningkite.mirror.serialization.SerializationException
@@ -15,7 +16,7 @@ import com.lightningkite.mirror.serialization.json.JsonSerializer
 suspend fun <T> ServerFunction<T>.invoke(
         onEndpoint: String,
         headers: Map<String, List<String>> = mapOf(),
-        serializer: StringSerializer = JsonSerializer
+        serializer: StringSerializer
 ): T {
     return HttpClient.callStringDetail(
             onEndpoint,
@@ -27,8 +28,12 @@ suspend fun <T> ServerFunction<T>.invoke(
             throw RemoteExceptionData.Thrown(serializer.read(it.message!!, RemoteExceptionData::class.type))
         }
         try {
+            val returnType = serializer.registry.classInfoRegistry[this::class]!!
+                    .allImplements(serializer.registry.classInfoRegistry)
+                    .find { it.kClass == ServerFunction::class }!!
+                    .typeParameters.first().type
             @Suppress("UNCHECKED_CAST")
-            serializer.read(it.result!!, this.returnType)
+            serializer.read(it.result!!, returnType as Type<T>)
         } catch (e: Exception) {
             throw SerializationException("Failed to read $it", e)
         }
@@ -50,10 +55,28 @@ suspend fun <T> ServerFunction<T>.invoke(
             //TODO: Catch 'n throw
         }
         try {
+            val returnType = serializer.registry.classInfoRegistry.getOrThrow(this::class)
+                    .allImplements(serializer.registry.classInfoRegistry)
+                    .find { it.kClass == ServerFunction::class }!!
+                    .typeParameters.first().type
             @Suppress("UNCHECKED_CAST")
-            serializer.read(it.result!!, this.returnType)
+            serializer.read(it.result!!, returnType as Type<T>)
         } catch (e: Exception) {
             throw SerializationException("Failed to read $it", e)
         }
     }
 }
+
+/*
+
+private val ServerFunctionReturnType = WeakHashMap<KClass<*>, Type<*>>()
+@Suppress("UNCHECKED_CAST")
+val <T> ServerFunction<T>.returnType: Type<T> get() = ServerFunctionReturnType.getOrPut(this::class){
+    ClassInfo[this::class].allImplements.find { it.kClass == ServerFunction::class }!!.typeParameters.first().type
+} as Type<T>
+
+private val ServerFunctionThrows = WeakHashMap<KClass<*>, List<String>?>()
+@Suppress("UNCHECKED_CAST")
+val ServerFunction<*>.throwsTypes: List<String>? get() = ServerFunctionThrows.getOrPut(this::class){
+    ClassInfo[this::class].annotations.find { it.name.endsWith("ThrowsTypes") }?.arguments as? List<String>
+}*/

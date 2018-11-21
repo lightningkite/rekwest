@@ -4,7 +4,7 @@
 //import com.lightningkite.kommon.exception.ForbiddenException
 //import com.lightningkite.mirror.archive.*
 //import com.lightningkite.mirror.archive.secure.PropertySecureTable
-//import com.lightningkite.mirror.info.SerializedFieldInfo
+//import com.lightningkite.mirror.info.FieldInfo
 //import com.lightningkite.mirror.info.info
 //import com.lightningkite.rekwest.server.invocation
 //import com.lightningkite.rekwest.server.security.HashedFieldRules
@@ -19,7 +19,7 @@
 //            atLeastEntropy = { 5 }
 //    )
 //    val emailRules = object : PropertyRules<User, String> {
-//        override val variable: SerializedFieldInfo<User, String> = UserReflection.Fields.email
+//        override val variable: FieldInfo<User, String> = UserReflection.Fields.email
 //        override suspend fun query(untypedUser: Any?) {}
 //        override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: User): Boolean = true
 //        override suspend fun write(untypedUser: Any?, currentState: User?, newState: String): String {
@@ -33,7 +33,7 @@
 //
 //    }
 //    val roleRules = object : PropertyRules<User, User.Role> {
-//        override val variable: SerializedFieldInfo<User, User.Role> = UserReflection.Fields.role
+//        override val variable: FieldInfo<User, User.Role> = UserReflection.Fields.role
 //        override suspend fun query(untypedUser: Any?) {}
 //        override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: User): Boolean = true
 //        override suspend fun write(untypedUser: Any?, currentState: User?, newState: User.Role): User.Role {
@@ -43,7 +43,7 @@
 //            return newState
 //        }
 //    }
-//    override val propertyRules: Map<SerializedFieldInfo<User, *>, PropertyRules<User, *>> = listOf<PropertyRules<User, *>>(
+//    override val propertyRules: Map<FieldInfo<User, *>, PropertyRules<User, *>> = listOf<PropertyRules<User, *>>(
 //            passwordRules,
 //            emailRules,
 //            roleRules

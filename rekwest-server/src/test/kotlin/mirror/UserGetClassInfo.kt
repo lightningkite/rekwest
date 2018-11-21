@@ -28,10 +28,10 @@ object UserGetClassInfo: ClassInfo<User.Get> {
    override val enumValues: List<User.Get>? = null
 
    object Fields {
-       val id = SerializedFieldInfo<User.Get, Reference<User, Long>>(UserGetClassInfo, "id", Type<Reference<User, Long>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User, Long>}, listOf())
+       val id = FieldInfo<User.Get, Reference<User, Long>>(UserGetClassInfo, "id", Type<Reference<User, Long>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User, Long>}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<User.Get, *>> = listOf(Fields.id)
+   override val fields:List<FieldInfo<User.Get, *>> = listOf(Fields.id)
 
    override fun construct(map: Map<String, Any?>): User.Get {
        //Gather variables

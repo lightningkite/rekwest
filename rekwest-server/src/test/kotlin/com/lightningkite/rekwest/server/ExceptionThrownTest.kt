@@ -2,14 +2,14 @@ package com.lightningkite.rekwest.server
 
 import com.lightningkite.kommon.exception.ForbiddenException
 import com.lightningkite.kommon.exception.stackTraceString
+import com.lightningkite.mirror.info.PrimitiveClassInfoRegistry
 import com.lightningkite.mirror.info.type
+import com.lightningkite.mirror.serialization.DefaultRegistry
 import com.lightningkite.mirror.serialization.json.JsonSerializer
 import com.lightningkite.rekwest.RemoteExceptionData
 import com.lightningkite.rekwest.ServerFunction
 import com.lightningkite.rekwest.server.PrincipalWrapper
 import com.lightningkite.rekwest.server.StringSerializerConverter
-import com.lightningkite.rekwest.server.invocation
-import com.lightningkite.rekwest.server.serverFunction
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.auth.Authentication
@@ -31,18 +31,23 @@ import kotlin.test.assertEquals
 
 class ExceptionThrownTest {
 
+    val registry = DefaultRegistry + TestRegistry
+    val handler = ServerFunctionHandler(registry.classInfoRegistry)
+    val serializer = JsonSerializer(registry)
+
     init{
-        configureAutoMirror()
-        ThrowExceptionRequest::class.invocation = {
-            println("I'm going to die here.")
-            throw ForbiddenException("NOPE")
+        with(handler){
+            ThrowExceptionRequest::class.invocation = {
+                println("I'm going to die here.")
+                throw ForbiddenException("NOPE")
+            }
         }
     }
 
     @Test
     fun throwing() = withTestApplication({
         install(ContentNegotiation) {
-            val converter = StringSerializerConverter(JsonSerializer)
+            val converter = StringSerializerConverter(serializer)
             register(converter.contentType, converter)
         }
         install(StatusPages) {
@@ -65,19 +70,21 @@ class ExceptionThrownTest {
             get("hello"){
                 call.respondText("HYPE", ContentType.Text.Plain, HttpStatusCode.Accepted)
             }
-            serverFunction("function", false)
+            with(handler){
+                serverFunction("function", false)
+            }
         }
     }){
         println("Beginning test")
         with(handleRequest(HttpMethod.Post, "/function"){
-            val body = JsonSerializer.write(ThrowExceptionRequest(), ServerFunction::class.type)
+            val body = serializer.write(ThrowExceptionRequest(), ServerFunction::class.type)
             println(body)
             this.setBody(body)
         }) {
-            println(response.status())
-            println(response.content)
-            val out = JsonSerializer.read(response.content ?: "", RemoteExceptionData::class.type)
-            println(out)
+            println("out: " + response.status())
+            println("out: " + response.content)
+            val out = serializer.read(response.content ?: "", RemoteExceptionData::class.type)
+            println("out: " + out)
         }
     }
 }

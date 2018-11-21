@@ -1,5 +1,5 @@
 com.lightningkite.rekwest.server
-configureAutoMirror
+TestRegistry
 
 com.lightningkite.rekwest.RemoteExceptionData
 com.lightningkite.rekwest.server.ThrowExceptionRequest

@@ -31,7 +31,7 @@ object UserRoleClassInfo: ClassInfo<User.Role> {
        
    }
 
-   override val fields:List<SerializedFieldInfo<User.Role, *>> = listOf()
+   override val fields:List<FieldInfo<User.Role, *>> = listOf()
 
    override fun construct(map: Map<String, Any?>): User.Role = throw NotImplementedError()
 

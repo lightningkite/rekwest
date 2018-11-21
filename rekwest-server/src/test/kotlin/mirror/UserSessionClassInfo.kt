@@ -28,11 +28,11 @@ object UserSessionClassInfo: ClassInfo<User.Session> {
    override val enumValues: List<User.Session>? = null
 
    object Fields {
-       val user = SerializedFieldInfo<User.Session, User>(UserSessionClassInfo, "user", Type<User>(User::class, listOf(), false), false, { it.user as User}, listOf())
-        val token = SerializedFieldInfo<User.Session, String>(UserSessionClassInfo, "token", Type<String>(String::class, listOf(), false), false, { it.token as String}, listOf())
+       val user = FieldInfo<User.Session, User>(UserSessionClassInfo, "user", Type<User>(User::class, listOf(), false), false, { it.user as User}, listOf())
+        val token = FieldInfo<User.Session, String>(UserSessionClassInfo, "token", Type<String>(String::class, listOf(), false), false, { it.token as String}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<User.Session, *>> = listOf(Fields.user, Fields.token)
+   override val fields:List<FieldInfo<User.Session, *>> = listOf(Fields.user, Fields.token)
 
    override fun construct(map: Map<String, Any?>): User.Session {
        //Gather variables

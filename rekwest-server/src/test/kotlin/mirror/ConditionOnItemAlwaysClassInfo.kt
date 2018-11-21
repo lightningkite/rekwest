@@ -25,7 +25,7 @@ object ConditionOnItemAlwaysClassInfo: ClassInfo<ConditionOnItem.Always<*>> {
        
    }
 
-   override val fields:List<SerializedFieldInfo<ConditionOnItem.Always<*>, *>> = listOf()
+   override val fields:List<FieldInfo<ConditionOnItem.Always<*>, *>> = listOf()
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.Always<kotlin.Any> {
        //Gather variables

@@ -25,7 +25,7 @@ object ConditionOnItemNeverClassInfo: ClassInfo<ConditionOnItem.Never<*>> {
        
    }
 
-   override val fields:List<SerializedFieldInfo<ConditionOnItem.Never<*>, *>> = listOf()
+   override val fields:List<FieldInfo<ConditionOnItem.Never<*>, *>> = listOf()
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.Never<kotlin.Any> {
        //Gather variables

@@ -28,10 +28,10 @@ object UserResetPasswordClassInfo: ClassInfo<User.ResetPassword> {
    override val enumValues: List<User.ResetPassword>? = null
 
    object Fields {
-       val email = SerializedFieldInfo<User.ResetPassword, String>(UserResetPasswordClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf())
+       val email = FieldInfo<User.ResetPassword, String>(UserResetPasswordClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf())
    }
 
-   override val fields:List<SerializedFieldInfo<User.ResetPassword, *>> = listOf(Fields.email)
+   override val fields:List<FieldInfo<User.ResetPassword, *>> = listOf(Fields.email)
 
    override fun construct(map: Map<String, Any?>): User.ResetPassword {
        //Gather variables

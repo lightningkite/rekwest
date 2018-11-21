@@ -25,7 +25,7 @@ object ModificationOnItemClassInfo: ClassInfo<ModificationOnItem<*,*>> {
        
    }
 
-   override val fields:List<SerializedFieldInfo<ModificationOnItem<*,*>, *>> = listOf()
+   override val fields:List<FieldInfo<ModificationOnItem<*,*>, *>> = listOf()
 
    override fun construct(map: Map<String, Any?>): ModificationOnItem<kotlin.Any, Any?> = throw NotImplementedError()
 

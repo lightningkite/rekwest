@@ -25,7 +25,7 @@ object ConditionOnItemClassInfo: ClassInfo<ConditionOnItem<*>> {
        
    }
 
-   override val fields:List<SerializedFieldInfo<ConditionOnItem<*>, *>> = listOf()
+   override val fields:List<FieldInfo<ConditionOnItem<*>, *>> = listOf()
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem<kotlin.Any> = throw NotImplementedError()
 
