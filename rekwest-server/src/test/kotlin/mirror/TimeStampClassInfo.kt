@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 object TimeStampClassInfo: ClassInfo<TimeStamp> {
 
    override val kClass: KClass<TimeStamp> = TimeStamp::class
-   override val modifiers: List<ClassInfo.Modifier> = listOf()
+   override val modifiers: List<ClassInfo.Modifier> = listOf(ClassInfo.Modifier.Data)
 
    override val implements: List<Type<*>> = listOf()
 

@@ -1,117 +1,147 @@
-//package com.lightningkite.rekwest.server
-//
-//import com.lightningkite.kommon.exception.ElementAlreadyExistsException
-//import com.lightningkite.kommon.exception.ForbiddenException
-//import com.lightningkite.mirror.archive.*
-//import com.lightningkite.mirror.archive.secure.PropertySecureTable
-//import com.lightningkite.mirror.info.FieldInfo
-//import com.lightningkite.mirror.info.info
-//import com.lightningkite.rekwest.server.invocation
-//import com.lightningkite.rekwest.server.security.HashedFieldRules
-//
-//
-//object TestUserTable : PropertySecureTable<User, Long>(
-//        underlying = InMemoryDatabase.table(User::class.info)
-//) {
-//    val passwordRules = HashedFieldRules(
-//            variable = UserReflection.Fields.password,
-//            getIdentifiers = { listOf(it.email) },
-//            atLeastEntropy = { 5 }
-//    )
-//    val emailRules = object : PropertyRules<User, String> {
-//        override val variable: FieldInfo<User, String> = UserReflection.Fields.email
-//        override suspend fun query(untypedUser: Any?) {}
-//        override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: User): Boolean = true
-//        override suspend fun write(untypedUser: Any?, currentState: User?, newState: String): String {
-//            //Make sure emails are unique
-//            val existing = Transaction(null, false, true).use {
-//                underlying.queryOne(it, ConditionOnItem.Equal(UserReflection.Fields.email, newState))
-//            }
-//            if (existing != null) throw ElementAlreadyExistsException("A user already exists with the email $newState.")
-//            return newState
-//        }
-//
-//    }
-//    val roleRules = object : PropertyRules<User, User.Role> {
-//        override val variable: FieldInfo<User, User.Role> = UserReflection.Fields.role
-//        override suspend fun query(untypedUser: Any?) {}
-//        override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: User): Boolean = true
-//        override suspend fun write(untypedUser: Any?, currentState: User?, newState: User.Role): User.Role {
-//            if (untypedUser?.let { it as? User }?.role ?: User.Role.Citizen < newState) {
-//                throw ForbiddenException("You cannot elevate a role to one higher than yours.")
-//            }
-//            return newState
-//        }
-//    }
-//    override val propertyRules: Map<FieldInfo<User, *>, PropertyRules<User, *>> = listOf<PropertyRules<User, *>>(
-//            passwordRules,
-//            emailRules,
-//            roleRules
-//    ).associate { it.variable to it }
-//
-//    override suspend fun wholeQuery(untypedUser: Any?) {}
-//    override suspend fun wholeRead(untypedUser: Any?, justInserted: Boolean, currentState: User): Boolean = true
-//    override suspend fun wholeWrite(untypedUser: Any?, isDelete: Boolean, currentState: User?) {
-//        when {
-//            currentState == null -> {
-//                //Making users is OK
-//            }
-//            currentState.id == (untypedUser as? User)?.id -> {
-//                //You can modify yourself
-//            }
-//            (untypedUser as? User)?.role ?: User.Role.Citizen >= User.Role.Admin -> {
-//                //Admins can do whatever they please
-//            }
-//            else -> throw ForbiddenException("You do not have permission to modify this user.")
-//        }
-//    }
-//
-//    fun setup() {
-//        User.Get::class.invocation = { get(it, this.id.id) }
-//        User.Insert::class.invocation = {
-//            insert(it, value).let {
-//                User.Session(
-//                        user = it,
-//                        token = it.id.toString()
-//                )
-//            }
-//        }
-//        User.Update::class.invocation = { update(it, value) }
-//        User.Modify::class.invocation = { modify(it, id.id, modifications) }
-//        User.Query::class.invocation = { query(it, condition, sortedBy, continuationToken, count) }
-//        User.Delete::class.invocation = { delete(it, id.id) }
-//        User.Login::class.invocation = {
-//            val raw = underlying.queryOne(
-//                    transaction = it,
-//                    condition = ConditionOnItem.Equal(UserReflection.Fields.email, email)
-//            ) ?: throw NoSuchElementException()
-//            if (passwordRules.check(raw, password)) {
-//                User.Session(
-//                        user = raw,
-//                        token = raw.id.toString()
-//                )
-//            } else {
-//                throw ForbiddenException("Wrong password")
-//            }
-//        }
-//        User.ResetPassword::class.invocation = {
-//            val raw = underlying.queryOne(
-//                    transaction = it,
-//                    condition = ConditionOnItem.Equal(UserReflection.Fields.email, email)
-//            ) ?: throw NoSuchElementException()
-//            val newPassword = (1..20).joinToString("") { ('a'..'z').random().toString() }
-//            modify(
-//                    transaction = it,
-//                    id = raw.id!!,
-//                    modifications = listOf(
-//                            ModificationOnItem.Set(UserReflection.Fields.password, newPassword)
-//                    )
-//            )
-////            Email.send(
-////                    to = email,
-////                    subject = "Password Reset",
-////                    body = "Your password has been reset to $newPassword."
-////            )
-//        }
-//    }
-//}
+package com.lightningkite.rekwest.server
+
+import com.lightningkite.kommon.exception.stackTraceString
+import com.lightningkite.kommunicate.HttpClient
+import com.lightningkite.kommunicate.HttpMethod
+import com.lightningkite.kommunicate.callString
+import com.lightningkite.lokalize.TimeStamp
+import com.lightningkite.lokalize.now
+import com.lightningkite.mirror.archive.Transaction
+import com.lightningkite.mirror.archive.key
+import com.lightningkite.mirror.archive.use
+import com.lightningkite.mirror.info.type
+import com.lightningkite.mirror.serialization.DefaultRegistry
+import com.lightningkite.mirror.serialization.json.JsonSerializer
+import com.lightningkite.rekwest.ServerFunction
+import com.lightningkite.rekwest.invoke
+import io.ktor.application.Application
+import io.ktor.application.call
+import io.ktor.application.install
+import io.ktor.auth.Authentication
+import io.ktor.auth.AuthenticationProvider
+import io.ktor.auth.basic
+import io.ktor.auth.jwt.jwt
+import io.ktor.features.ContentNegotiation
+import io.ktor.features.StatusPages
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.respond
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.routing
+import io.ktor.server.cio.CIO
+import io.ktor.server.engine.ApplicationEngine
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.testing.withTestApplication
+import io.ktor.util.KtorExperimentalAPI
+import kotlinx.coroutines.runBlocking
+import org.junit.Test
+import java.util.concurrent.TimeUnit
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.assertEquals
+
+class TestUserTable {
+    val registry = DefaultRegistry + TestRegistry
+    val handler = ServerFunctionHandler(registry.classInfoRegistry)
+    val serializer = JsonSerializer(registry)
+
+    init {
+        UserTable.setup(handler)
+    }
+
+    var server: ApplicationEngine? = null
+
+    fun Application.app() {
+        install(ContentNegotiation) {
+            val converter = StringSerializerConverter(serializer)
+            register(converter.contentType, converter)
+        }
+        install(StatusPages) {
+            status(HttpStatusCode.NotFound) {
+                call.respond(HttpStatusCode.NotFound, "Nothing here")
+            }
+            exception<Exception> {
+                call.respond("Throwing error:\n ${it.stackTraceString()}")
+            }
+        }
+        install(Authentication) {
+            register(object : AuthenticationProvider("manual") {
+
+            })
+            jwt("jwt") {
+                realm = "com.lightningkite"
+                verifier(UserTable.Tokens.verifier)
+                validate {
+                    it.payload.claims["user"]?.asLong()?.let { id ->
+                        Transaction(atomic = false, readOnly = true).use {
+                            PrincipalWrapper(UserTable.underlying.get(it, id))
+                        }
+                    }.also {
+                        println("Authenticated as $it")
+                    }
+                }
+            }
+        }
+        routing {
+            println("Setting up server function")
+            get("hello") {
+                call.respondText("HYPE", ContentType.Text.Plain, HttpStatusCode.Accepted)
+            }
+            with(handler) {
+                serverFunction("function", false)
+            }
+        }
+    }
+
+    @KtorExperimentalAPI
+    @BeforeTest
+    fun before() {
+        server = embeddedServer(CIO, port = 8080) {
+            app()
+        }.start(false)
+        Thread.sleep(100L)
+    }
+
+    @AfterTest
+    fun after() {
+        server?.stop(0L, 100L, TimeUnit.MILLISECONDS)
+    }
+
+    @Test
+    fun serverWorks() {
+        runBlocking {
+            assertEquals("HYPE", HttpClient.callString("http://localhost:8080/hello", HttpMethod.GET))
+        }
+    }
+
+    @Test
+    fun serializeFunction() {
+        serializer.read("""["User.Insert",{"value":{"id":null,"email":"josephivie@gmail.com","password":"testpasswordofnightmares","role":"Citizen","rejectTokensBefore":{"millisecondsSinceEpoch":0}}}]""", ServerFunction::class.type)
+    }
+
+    @Test
+    fun testAll() {
+        runBlocking {
+            val session = User.Insert(User(email = "josephivie@gmail.com", password = "testpasswordofnightmares"))
+                    .invoke(
+                            onEndpoint = "http://localhost:8080/function",
+                            serializer = serializer
+                    )
+                    .also { println(it) }
+            User.Get(session.user.key()!!)
+                    .invoke(
+                            onEndpoint = "http://localhost:8080/function",
+                            headers = mapOf("Authorization" to listOf(session.token)),
+                            serializer = serializer
+                    )
+                    .also { println(it) }
+            User.Login(session.user.email, "testpasswordofnightmares")
+                    .invoke(
+                            onEndpoint = "http://localhost:8080/function",
+                            serializer = serializer
+                    )
+                    .also { println(it) }
+        }
+    }
+}

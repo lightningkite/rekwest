@@ -49,6 +49,8 @@ dependencies {
     compile "io.ktor:ktor-websockets:${ktorVersion}"
     compile "me.gosimple:nbvcxz:1.4.2"
     testCompile "io.ktor:ktor-server-netty:${ktorVersion}"
+    testCompile "io.ktor:ktor-server-cio:${ktorVersion}"
+    testCompile "io.ktor:ktor-auth-jwt:${ktorVersion}"
 
     compile 'de.mkammerer:argon2-jvm:2.5'
 

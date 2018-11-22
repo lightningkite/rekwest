@@ -37,3 +37,4 @@ com.lightningkite.mirror.archive.ModificationOnItem.Add
 com.lightningkite.mirror.archive.ModificationOnItem.Multiply
 com.lightningkite.mirror.archive.SortOnItem
 com.lightningkite.mirror.archive.QueryResult
+com.lightningkite.mirror.archive.Reference

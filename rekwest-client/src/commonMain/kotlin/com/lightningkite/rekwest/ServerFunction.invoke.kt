@@ -21,7 +21,7 @@ suspend fun <T> ServerFunction<T>.invoke(
     return HttpClient.callStringDetail(
             onEndpoint,
             HttpMethod.POST,
-            HttpBody.string(serializer.contentType, serializer.write(this, Type(ServerFunction::class, listOf(TypeProjection.STAR)))),
+            HttpBody.string(serializer.contentType, serializer.write(this, Type(ServerFunction::class, listOf(TypeProjection.STAR))).also{ println("Serialized: " + it) }),
             headers
     ).let {
         it.failure?.let { it as? HttpException }?.let {

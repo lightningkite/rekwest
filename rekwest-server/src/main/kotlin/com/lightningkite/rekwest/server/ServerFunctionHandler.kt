@@ -88,7 +88,7 @@ class ServerFunctionHandler(
     val KClass<out ServerFunction<*>>.returnType: Type<*>
         get() {
             return KClassServerFunction_Returns.getOrPut(this) {
-                classInfoRegistry.getOrThrow(this::class)
+                classInfoRegistry.getOrThrow(this)
                         .allImplements(classInfoRegistry)
                         .find { it.kClass == ServerFunction::class }!!
                         .typeParameters.first().type

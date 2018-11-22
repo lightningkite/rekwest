@@ -41,5 +41,6 @@ val TestRegistry = ClassInfoRegistry(
     com.lightningkite.mirror.archive.ModificationOnItemAddClassInfo,
     com.lightningkite.mirror.archive.ModificationOnItemMultiplyClassInfo,
     com.lightningkite.mirror.archive.SortOnItemClassInfo,
-    com.lightningkite.mirror.archive.QueryResultClassInfo
+    com.lightningkite.mirror.archive.QueryResultClassInfo,
+    com.lightningkite.mirror.archive.ReferenceClassInfo
 )
