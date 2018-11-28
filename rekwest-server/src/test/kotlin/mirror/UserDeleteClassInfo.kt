@@ -29,14 +29,14 @@ object UserDeleteClassInfo: ClassInfo<User.Delete> {
    override val enumValues: List<User.Delete>? = null
 
    object Fields {
-       val id = FieldInfo<User.Delete, Reference<User, Long>>(UserDeleteClassInfo, "id", Type<Reference<User, Long>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User, Long>}, listOf())
+       val id = FieldInfo<User.Delete, Reference<User>>(UserDeleteClassInfo, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
    }
 
    override val fields:List<FieldInfo<User.Delete, *>> = listOf(Fields.id)
 
    override fun construct(map: Map<String, Any?>): User.Delete {
        //Gather variables
-       val id:Reference<User, Long> = map["id"] as Reference<User, Long>
+       val id:Reference<User> = map["id"] as Reference<User>
            //Handle the optionals
        
        //Finally do the call

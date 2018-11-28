@@ -10,12 +10,12 @@ import com.lightningkite.rekwest.ServerFunction
 
 
 data class User(
-        override var id: Long? = null,
+        override var id: Id = Id.key(),
         @Indexed var email: String,
         var password: String,
         var role: User.Role = User.Role.Citizen,
         var rejectTokensBefore: TimeStamp = TimeStamp(0)
-) : Model<Long> {
+) : HasId {
 
     fun getIdentifiers(): List<String> = listOf(email)
 
@@ -40,7 +40,7 @@ data class User(
 
 
     @ThrowsTypes(ExceptionNames.NoSuchElementException)
-    class Get(val id: Reference<User, Long>) : ServerFunction<User>
+    class Get(val id: Reference<User>) : ServerFunction<User?>
 
 
     @Mutates
@@ -55,7 +55,7 @@ data class User(
 
     @Mutates
     @ThrowsTypes(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)
-    class Modify(val id: Reference<User, Long>, val modifications: List<ModificationOnItem<User, *>>) : ServerFunction<User>
+    class Modify(val id: Reference<User>, val modifications: List<ModificationOnItem<User, *>>) : ServerFunction<User>
 
 
     @ThrowsTypes(ExceptionNames.ForbiddenException)
@@ -69,7 +69,7 @@ data class User(
 
     @Mutates
     @ThrowsTypes(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)
-    class Delete(val id: Reference<User, Long>) : ServerFunction<Unit>
+    class Delete(val id: Reference<User>) : ServerFunction<Unit>
 
 
     @ThrowsTypes(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)

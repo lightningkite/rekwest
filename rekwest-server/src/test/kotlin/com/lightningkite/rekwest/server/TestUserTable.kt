@@ -6,6 +6,7 @@ import com.lightningkite.kommunicate.HttpMethod
 import com.lightningkite.kommunicate.callString
 import com.lightningkite.lokalize.TimeStamp
 import com.lightningkite.lokalize.now
+import com.lightningkite.mirror.archive.Id
 import com.lightningkite.mirror.archive.Transaction
 import com.lightningkite.mirror.archive.key
 import com.lightningkite.mirror.archive.use
@@ -73,9 +74,9 @@ class TestUserTable {
                 realm = "com.lightningkite"
                 verifier(UserTable.Tokens.verifier)
                 validate {
-                    it.payload.claims["user"]?.asLong()?.let { id ->
+                    it.payload.claims["user"]?.asString()?.let { id ->
                         Transaction(atomic = false, readOnly = true).use {
-                            PrincipalWrapper(UserTable.underlying.get(it, id))
+                            PrincipalWrapper(UserTable.underlying.get(it, Id.fromUUIDString(id)))
                         }
                     }.also {
                         println("Authenticated as $it")
@@ -113,11 +114,6 @@ class TestUserTable {
         runBlocking {
             assertEquals("HYPE", HttpClient.callString("http://localhost:8080/hello", HttpMethod.GET))
         }
-    }
-
-    @Test
-    fun serializeFunction() {
-        serializer.read("""["User.Insert",{"value":{"id":null,"email":"josephivie@gmail.com","password":"testpasswordofnightmares","role":"Citizen","rejectTokensBefore":{"millisecondsSinceEpoch":0}}}]""", ServerFunction::class.type)
     }
 
     @Test

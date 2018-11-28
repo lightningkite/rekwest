@@ -1,6 +1,6 @@
 package com.lightningkite.rekwest.server.security
 
-import com.lightningkite.mirror.archive.Model
+import com.lightningkite.mirror.archive.HasId
 import com.lightningkite.mirror.archive.secure.PropertySecureTable
 import com.lightningkite.mirror.info.FieldInfo
 import de.mkammerer.argon2.Argon2Factory
@@ -9,7 +9,7 @@ import me.gosimple.nbvcxz.resources.ConfigurationBuilder
 import me.gosimple.nbvcxz.resources.DictionaryBuilder
 import java.lang.IllegalArgumentException
 
-class HashedFieldRules<T : Model<*>>(
+class HashedFieldRules<T : HasId>(
         override val variable: FieldInfo<T, String>,
         val getIdentifiers: (T)->List<String>,
         val atLeastEntropy: (T?)->Int = { 30 /*Takes roughly a billion guesses*/ }

@@ -18,7 +18,7 @@ object UserGetClassInfo: ClassInfo<User.Get> {
    override val kClass: KClass<User.Get> = User.Get::class
    override val modifiers: List<ClassInfo.Modifier> = listOf()
 
-   override val implements: List<Type<*>> = listOf(Type<ServerFunction<User>>(ServerFunction::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false))
+   override val implements: List<Type<*>> = listOf(Type<ServerFunction<User?>>(ServerFunction::class, listOf(TypeProjection(Type<User?>(User::class, listOf(), true), TypeProjection.Variance.INVARIANT)), false))
 
    override val packageName: String = "com.lightningkite.rekwest.server"
    override val owner: KClass<*>? = User::class
@@ -29,14 +29,14 @@ object UserGetClassInfo: ClassInfo<User.Get> {
    override val enumValues: List<User.Get>? = null
 
    object Fields {
-       val id = FieldInfo<User.Get, Reference<User, Long>>(UserGetClassInfo, "id", Type<Reference<User, Long>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User, Long>}, listOf())
+       val id = FieldInfo<User.Get, Reference<User>>(UserGetClassInfo, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
    }
 
    override val fields:List<FieldInfo<User.Get, *>> = listOf(Fields.id)
 
    override fun construct(map: Map<String, Any?>): User.Get {
        //Gather variables
-       val id:Reference<User, Long> = map["id"] as Reference<User, Long>
+       val id:Reference<User> = map["id"] as Reference<User>
            //Handle the optionals
        
        //Finally do the call

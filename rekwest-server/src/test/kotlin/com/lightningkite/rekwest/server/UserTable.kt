@@ -11,7 +11,7 @@ import com.lightningkite.mirror.serialization.DefaultRegistry
 import com.lightningkite.rekwest.server.security.HashedFieldRules
 
 
-object UserTable : PropertySecureTable<User, Long>(
+object UserTable : PropertySecureTable<User>(
         classInfo = UserClassInfo,
         underlying = InMemoryDatabase(FullRegistry).table(User::class)
 ) {
@@ -33,7 +33,7 @@ object UserTable : PropertySecureTable<User, Long>(
 
         fun generate(user: User): String = JWT.create()
                 .withIssuedAt(java.util.Date())
-                .withClaim("user", user.id)
+                .withClaim("user", user.id.toUUIDString())
                 .withIssuer(issuer)
                 .sign(algorithm)
     }

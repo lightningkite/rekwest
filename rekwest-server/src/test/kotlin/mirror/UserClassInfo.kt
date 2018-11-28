@@ -18,7 +18,7 @@ object UserClassInfo: ClassInfo<User> {
    override val kClass: KClass<User> = User::class
    override val modifiers: List<ClassInfo.Modifier> = listOf(ClassInfo.Modifier.Data)
 
-   override val implements: List<Type<*>> = listOf(Type<Model<Long>>(Model::class, listOf(TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false))
+   override val implements: List<Type<*>> = listOf()
 
    override val packageName: String = "com.lightningkite.rekwest.server"
    override val owner: KClass<*>? = null
@@ -29,7 +29,7 @@ object UserClassInfo: ClassInfo<User> {
    override val enumValues: List<User>? = null
 
    object Fields {
-       val id = FieldInfo<User, Long?>(UserClassInfo, "id", Type<Long?>(Long::class, listOf(), true), false, { it.id as Long?}, listOf())
+       val id = FieldInfo<User, Id>(UserClassInfo, "id", Type<Id>(Id::class, listOf(), false), false, { it.id as Id}, listOf())
         val email = FieldInfo<User, String>(UserClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf(AnnotationInfo("Indexed", listOf())))
         val password = FieldInfo<User, String>(UserClassInfo, "password", Type<String>(String::class, listOf(), false), false, { it.password as String}, listOf())
         val role = FieldInfo<User, User.Role>(UserClassInfo, "role", Type<User.Role>(User.Role::class, listOf(), false), false, { it.role as User.Role}, listOf())
@@ -40,7 +40,7 @@ object UserClassInfo: ClassInfo<User> {
 
    override fun construct(map: Map<String, Any?>): User {
        //Gather variables
-       val id:Long? = map["id"] as Long?
+       val id:Id = map["id"] as Id
         val email:String = map["email"] as String
         val password:String = map["password"] as String
         val role:User.Role = map["role"] as User.Role

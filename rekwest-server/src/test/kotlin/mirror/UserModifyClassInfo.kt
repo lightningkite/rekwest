@@ -29,7 +29,7 @@ object UserModifyClassInfo: ClassInfo<User.Modify> {
    override val enumValues: List<User.Modify>? = null
 
    object Fields {
-       val id = FieldInfo<User.Modify, Reference<User, Long>>(UserModifyClassInfo, "id", Type<Reference<User, Long>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Long>(Long::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User, Long>}, listOf())
+       val id = FieldInfo<User.Modify, Reference<User>>(UserModifyClassInfo, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
         val modifications = FieldInfo<User.Modify, List<ModificationOnItem<User, *>>>(UserModifyClassInfo, "modifications", Type<List<ModificationOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<ModificationOnItem<User, *>>(ModificationOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.modifications as List<ModificationOnItem<User, *>>}, listOf())
    }
 
@@ -37,7 +37,7 @@ object UserModifyClassInfo: ClassInfo<User.Modify> {
 
    override fun construct(map: Map<String, Any?>): User.Modify {
        //Gather variables
-       val id:Reference<User, Long> = map["id"] as Reference<User, Long>
+       val id:Reference<User> = map["id"] as Reference<User>
         val modifications:List<ModificationOnItem<User, *>> = map["modifications"] as List<ModificationOnItem<User, *>>
            //Handle the optionals
        
