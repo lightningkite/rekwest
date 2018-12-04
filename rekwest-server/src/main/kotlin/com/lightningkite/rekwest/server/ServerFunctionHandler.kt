@@ -6,7 +6,6 @@ import com.lightningkite.mirror.archive.use
 import com.lightningkite.mirror.info.*
 import com.lightningkite.rekwest.RemoteExceptionData
 import com.lightningkite.rekwest.ServerFunction
-import com.lightningkite.rekwest.invoke
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.routing.Route
@@ -19,9 +18,8 @@ class ServerFunctionHandler(
         val classInfoRegistry: ClassInfoRegistry
 ) {
 
-
     @ContextDsl
-    fun Route.serverFunction(path: String, supressStackTrace: Boolean = true): Route {
+    fun Route.serverFunction(path: String, suppressStackTrace: Boolean = true): Route {
         return post(path) { _ ->
             try {
                 val sf = call.receive(ServerFunction::class.type)
@@ -40,7 +38,7 @@ class ServerFunctionHandler(
                             value = RemoteExceptionData(
                                     type = e.javaClass.simpleName,
                                     message = e.message ?: "",
-                                    trace = if (supressStackTrace) "" else e.stackTraceString(),
+                                    trace = if (suppressStackTrace) "" else e.stackTraceString(),
                                     data = null
                             )
                     )
@@ -53,7 +51,7 @@ class ServerFunctionHandler(
     }
 
     @ContextDsl
-    fun Route.serverFunctions(path: String, supressStackTrace: Boolean = true): Route {
+    fun Route.serverFunctions(path: String, suppressStackTrace: Boolean = true): Route {
         return post(path) { _ ->
             try {
                 val sfs = call.receive(ServerFunction::class.type.list)
@@ -71,7 +69,7 @@ class ServerFunctionHandler(
                             value = RemoteExceptionData(
                                     type = e.javaClass.simpleName,
                                     message = e.message ?: "",
-                                    trace = if (supressStackTrace) "" else e.stackTraceString(),
+                                    trace = if (suppressStackTrace) "" else e.stackTraceString(),
                                     data = null
                             )
                     )
@@ -82,7 +80,6 @@ class ServerFunctionHandler(
         }
 
     }
-
 
     private val KClassServerFunction_Returns = HashMap<KClass<*>, Type<*>>()
     val KClass<out ServerFunction<*>>.returnType: Type<*>
@@ -100,7 +97,18 @@ class ServerFunctionHandler(
     val KClass<out ServerFunction<*>>.throwsTypes: List<String>
         get() {
             return KClassServerFunction_Throws.getOrPut(this) {
-                classInfoRegistry.getOrThrow(this).annotations.find { it.name.endsWith("ThrowsTypes") }?.arguments as? List<String> ?: listOf()
+                classInfoRegistry[this]!!
+                        .implementsTree(classInfoRegistry)
+                        .pathTo(ServerFunction::class)
+                        ?.asSequence()
+                        ?.flatMap {
+                            it.info.annotations
+                                    .find { it.name.endsWith("ThrowsTypes") }
+                                    ?.arguments
+                                    ?.asSequence()
+                                    ?.mapNotNull { it as? String } ?: sequenceOf()
+                        }
+                        ?.toList() ?: listOf()
             }
         }
 
@@ -108,7 +116,13 @@ class ServerFunctionHandler(
     val KClass<out ServerFunction<*>>.requiresWrite: Boolean
         get() {
             return KClassServerFunction_RequiresWrite.getOrPut(this) {
-                classInfoRegistry[this]!!.annotations.any { it.name.endsWith("Mutates") }
+                classInfoRegistry[this]!!
+                        .implementsTree(classInfoRegistry)
+                        .pathTo(ServerFunction::class)
+                        ?.asSequence()
+                        ?.any {
+                            it.info.annotations.any { it.name.endsWith("Mutates") } ?: false
+                        } ?: false
             }
         }
 
@@ -119,7 +133,13 @@ class ServerFunctionHandler(
         }
         get() {
             return KClassServerFunction_RequiresAtomicTransaction.getOrPut(this) {
-                classInfoRegistry[this]!!.annotations.any { it.name.endsWith("RequiresAtomicTransaction") }
+                classInfoRegistry[this]!!
+                        .implementsTree(classInfoRegistry)
+                        .pathTo(ServerFunction::class)
+                        ?.asSequence()
+                        ?.any {
+                            it.info.annotations.any { it.name.endsWith("RequiresAtomicTransaction") } ?: false
+                        } ?: false
             }
         }
 
@@ -130,7 +150,15 @@ class ServerFunctionHandler(
             KClassServerFunction_Invocation[this] = value as suspend (Any, Transaction) -> Any?
         }
         get() {
-            return KClassServerFunction_Invocation[this] as suspend SF.(Transaction) -> R
+            return KClassServerFunction_Invocation.getOrPut(this) {
+                classInfoRegistry[this]!!
+                        .implementsTree(classInfoRegistry)
+                        .pathTo(ServerFunction::class)
+                        ?.asSequence()
+                        ?.mapNotNull { KClassServerFunction_Invocation[it.info.kClass] }
+                        ?.firstOrNull()
+                        ?: throw IllegalArgumentException("No invocation could be found for the server function type $this")
+            } as suspend SF.(Transaction) -> R
         }
 
     @Suppress("UNCHECKED_CAST")

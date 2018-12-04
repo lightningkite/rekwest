@@ -74,7 +74,7 @@ object UserTable : PropertySecureTable<User>(
             roleRules
     ).associate { it.variable to it }
 
-    override suspend fun wholeQuery(untypedUser: Any?) {}
+    override suspend fun wholeQuery(untypedUser: Any?) = ConditionOnItem.Always<User>()
     override suspend fun wholeRead(untypedUser: Any?, justInserted: Boolean, currentState: User): Boolean = true
     override suspend fun wholeWrite(untypedUser: Any?, isDelete: Boolean, currentState: User?) {
         when {
