@@ -10,6 +10,7 @@ import com.lightningkite.mirror.archive.Id
 import com.lightningkite.mirror.archive.Transaction
 import com.lightningkite.mirror.archive.key
 import com.lightningkite.mirror.archive.use
+import com.lightningkite.mirror.info.implementsTree
 import com.lightningkite.mirror.info.type
 import com.lightningkite.mirror.serialization.DefaultRegistry
 import com.lightningkite.mirror.serialization.json.JsonSerializer
@@ -114,6 +115,12 @@ class TestUserTable {
         runBlocking {
             assertEquals("HYPE", HttpClient.callString("http://localhost:8080/hello", HttpMethod.GET))
         }
+    }
+
+    @Test
+    fun treeWorks() {
+        println("Tree: ${User.Insert::class.let { registry.classInfoRegistry[it]!! }.implementsTree(registry.classInfoRegistry)}")
+        println("Tree Path: ${User.Insert::class.let { registry.classInfoRegistry[it]!! }.implementsTree(registry.classInfoRegistry).pathTo(ServerFunction::class)}")
     }
 
     @Test
