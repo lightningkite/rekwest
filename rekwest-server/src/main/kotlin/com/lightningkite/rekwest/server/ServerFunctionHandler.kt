@@ -121,7 +121,7 @@ class ServerFunctionHandler(
                         .pathTo(ServerFunction::class)
                         ?.asSequence()
                         ?.any {
-                            it.info.annotations.any { it.name.endsWith("Mutates") } ?: false
+                            it.info.annotations.any { it.name.endsWith("Mutates") }
                         } ?: false
             }
         }
@@ -138,7 +138,7 @@ class ServerFunctionHandler(
                         .pathTo(ServerFunction::class)
                         ?.asSequence()
                         ?.any {
-                            it.info.annotations.any { it.name.endsWith("RequiresAtomicTransaction") } ?: false
+                            it.info.annotations.any { it.name.endsWith("RequiresAtomicTransaction") }
                         } ?: false
             }
         }

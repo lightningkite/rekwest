@@ -4,11 +4,11 @@ package com.lightningkite.rekwest.server
 
 import com.lightningkite.kommon.exception.ExceptionNames
 import com.lightningkite.lokalize.TimeStamp
-import com.lightningkite.mirror.archive.*
 import com.lightningkite.mirror.info.Indexed
 import com.lightningkite.mirror.info.Mutates
 import com.lightningkite.mirror.info.ThrowsTypes
 import com.lightningkite.rekwest.ServerFunction
+import com.lightningkite.mirror.archive.*
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -18,7 +18,7 @@ object UserClassInfo: ClassInfo<User> {
    override val kClass: KClass<User> = User::class
    override val modifiers: List<ClassInfo.Modifier> = listOf(ClassInfo.Modifier.Data)
 
-   override val implements: List<Type<*>> = listOf()
+   override val implements: List<Type<*>> = listOf(Type<HasId>(HasId::class, listOf(), false))
 
    override val packageName: String = "com.lightningkite.rekwest.server"
    override val owner: KClass<*>? = null
@@ -29,24 +29,23 @@ object UserClassInfo: ClassInfo<User> {
    override val enumValues: List<User>? = null
 
    object Fields {
-       val id = FieldInfo<User, Id>(UserClassInfo, "id", Type<Id>(Id::class, listOf(), false), false, { it.id as Id}, listOf())
-        val email = FieldInfo<User, String>(UserClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf(AnnotationInfo("Indexed", listOf())))
+       val id = FieldInfo<User, Id>(UserClassInfo, "id", Type<Id>(Id::class, listOf(), false), true, { it.id as Id}, listOf())
+        val email = FieldInfo<User, String>(UserClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf(AnnotationInfo("@Indexed", listOf())))
         val password = FieldInfo<User, String>(UserClassInfo, "password", Type<String>(String::class, listOf(), false), false, { it.password as String}, listOf())
-        val role = FieldInfo<User, User.Role>(UserClassInfo, "role", Type<User.Role>(User.Role::class, listOf(), false), false, { it.role as User.Role}, listOf())
-        val rejectTokensBefore = FieldInfo<User, TimeStamp>(UserClassInfo, "rejectTokensBefore", Type<TimeStamp>(TimeStamp::class, listOf(), false), false, { it.rejectTokensBefore as TimeStamp}, listOf())
+        val role = FieldInfo<User, User.Role>(UserClassInfo, "role", Type<User.Role>(User.Role::class, listOf(), false), true, { it.role as User.Role}, listOf())
+        val rejectTokensBefore = FieldInfo<User, TimeStamp>(UserClassInfo, "rejectTokensBefore", Type<TimeStamp>(TimeStamp::class, listOf(), false), true, { it.rejectTokensBefore as TimeStamp}, listOf())
    }
 
    override val fields:List<FieldInfo<User, *>> = listOf(Fields.id, Fields.email, Fields.password, Fields.role, Fields.rejectTokensBefore)
 
    override fun construct(map: Map<String, Any?>): User {
        //Gather variables
-       val id:Id = map["id"] as Id
-        val email:String = map["email"] as String
+       val email:String = map["email"] as String
         val password:String = map["password"] as String
-        val role:User.Role = map["role"] as User.Role
-        val rejectTokensBefore:TimeStamp = map["rejectTokensBefore"] as TimeStamp
            //Handle the optionals
-       
+       val id:Id = map["id"] as? Id ?: Id.key()
+        val role:User.Role = map["role"] as? User.Role ?: User.Role.Citizen
+        val rejectTokensBefore:TimeStamp = map["rejectTokensBefore"] as? TimeStamp ?: TimeStamp(0)
        //Finally do the call
        return User(
            id = id,

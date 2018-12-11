@@ -4,11 +4,11 @@ package com.lightningkite.rekwest.server
 
 import com.lightningkite.kommon.exception.ExceptionNames
 import com.lightningkite.lokalize.TimeStamp
-import com.lightningkite.mirror.archive.*
 import com.lightningkite.mirror.info.Indexed
 import com.lightningkite.mirror.info.Mutates
 import com.lightningkite.mirror.info.ThrowsTypes
 import com.lightningkite.rekwest.ServerFunction
+import com.lightningkite.mirror.archive.*
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -25,26 +25,26 @@ object UserQueryClassInfo: ClassInfo<User.Query> {
    override val ownerName: String? = "User"
 
    override val name: String = "Query"
-   override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("ThrowsTypes", listOf(ExceptionNames.ForbiddenException)))
+   override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException)))
    override val enumValues: List<User.Query>? = null
 
    object Fields {
-       val condition = FieldInfo<User.Query, ConditionOnItem<User>>(UserQueryClassInfo, "condition", Type<ConditionOnItem<User>>(ConditionOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.condition as ConditionOnItem<User>}, listOf())
-        val sortedBy = FieldInfo<User.Query, List<SortOnItem<User, *>>>(UserQueryClassInfo, "sortedBy", Type<List<SortOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<SortOnItem<User, *>>(SortOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.sortedBy as List<SortOnItem<User, *>>}, listOf())
-        val continuationToken = FieldInfo<User.Query, String?>(UserQueryClassInfo, "continuationToken", Type<String?>(String::class, listOf(), true), false, { it.continuationToken as String?}, listOf())
-        val count = FieldInfo<User.Query, Int>(UserQueryClassInfo, "count", Type<Int>(Int::class, listOf(), false), false, { it.count as Int}, listOf())
+       val condition = FieldInfo<User.Query, ConditionOnItem<User>>(UserQueryClassInfo, "condition", Type<ConditionOnItem<User>>(ConditionOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), true, { it.condition as ConditionOnItem<User>}, listOf())
+        val sortedBy = FieldInfo<User.Query, List<SortOnItem<User, *>>>(UserQueryClassInfo, "sortedBy", Type<List<SortOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<SortOnItem<User, *>>(SortOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), true, { it.sortedBy as List<SortOnItem<User, *>>}, listOf())
+        val continuationToken = FieldInfo<User.Query, String?>(UserQueryClassInfo, "continuationToken", Type<String?>(String::class, listOf(), true), true, { it.continuationToken as String?}, listOf())
+        val count = FieldInfo<User.Query, Int>(UserQueryClassInfo, "count", Type<Int>(Int::class, listOf(), false), true, { it.count as Int}, listOf())
    }
 
    override val fields:List<FieldInfo<User.Query, *>> = listOf(Fields.condition, Fields.sortedBy, Fields.continuationToken, Fields.count)
 
    override fun construct(map: Map<String, Any?>): User.Query {
        //Gather variables
-       val condition:ConditionOnItem<User> = map["condition"] as ConditionOnItem<User>
-        val sortedBy:List<SortOnItem<User, *>> = map["sortedBy"] as List<SortOnItem<User, *>>
-        val continuationToken:String? = map["continuationToken"] as String?
-        val count:Int = map["count"] as Int
-           //Handle the optionals
        
+           //Handle the optionals
+       val condition:ConditionOnItem<User> = map["condition"] as? ConditionOnItem<User> ?: ConditionOnItem.Always()
+        val sortedBy:List<SortOnItem<User, *>> = map["sortedBy"] as? List<SortOnItem<User, *>> ?: listOf()
+        val continuationToken:String? = map["continuationToken"] as? String? ?: null
+        val count:Int = map["count"] as? Int ?: 100
        //Finally do the call
        return User.Query(
            condition = condition,

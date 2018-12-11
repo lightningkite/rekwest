@@ -20,7 +20,7 @@ object ThrowExceptionRequestClassInfo: ClassInfo<ThrowExceptionRequest> {
    override val ownerName: String? = null
 
    override val name: String = "ThrowExceptionRequest"
-   override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("ThrowsTypes", listOf("ForbiddenException")))
+   override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@ThrowsTypes", listOf("ForbiddenException")))
    override val enumValues: List<ThrowExceptionRequest>? = null
 
    object Fields {

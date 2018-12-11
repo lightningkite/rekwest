@@ -4,11 +4,11 @@ package com.lightningkite.rekwest.server
 
 import com.lightningkite.kommon.exception.ExceptionNames
 import com.lightningkite.lokalize.TimeStamp
-import com.lightningkite.mirror.archive.*
 import com.lightningkite.mirror.info.Indexed
 import com.lightningkite.mirror.info.Mutates
 import com.lightningkite.mirror.info.ThrowsTypes
 import com.lightningkite.rekwest.ServerFunction
+import com.lightningkite.mirror.archive.*
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -25,7 +25,7 @@ object UserInsertClassInfo: ClassInfo<User.Insert> {
    override val ownerName: String? = "User"
 
    override val name: String = "Insert"
-   override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("Mutates", listOf()), AnnotationInfo("ThrowsTypes", listOf(ExceptionNames.ForbiddenException)))
+   override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@Mutates", listOf()), AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException)))
    override val enumValues: List<User.Insert>? = null
 
    object Fields {
