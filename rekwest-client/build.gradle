@@ -58,10 +58,10 @@ kotlin {
             dependencies {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-common'
                 api "org.jetbrains.kotlinx:kotlinx-io:0.1.1"
-                api "com.lightningkite:kommon-metadata:${project.version}"
-                api "com.lightningkite:mirror-runtime-metadata:${project.version}"
-                api "com.lightningkite:kommunicate-metadata:${project.version}"
-                api "com.lightningkite:mirror-archive-api-metadata:${project.version}"
+                api 'com.lightningkite:kommon-metadata:0.0.2'
+                api 'com.lightningkite:mirror-runtime-metadata:0.0.2'
+                api 'com.lightningkite:kommunicate-metadata:0.0.2'
+                api 'com.lightningkite:mirror-archive-api-metadata:0.0.2'
             }
         }
         commonTest {
@@ -74,10 +74,10 @@ kotlin {
             dependencies {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
                 api "org.jetbrains.kotlinx:kotlinx-io-jvm:0.1.1"
-                api "com.lightningkite:kommon-jvm:${project.version}"
-                api "com.lightningkite:mirror-runtime-jvm:${project.version}"
-                api "com.lightningkite:kommunicate-jvm:${project.version}"
-                api "com.lightningkite:mirror-archive-api-jvm:${project.version}"
+                api 'com.lightningkite:kommon-jvm:0.0.2'
+                api 'com.lightningkite:mirror-runtime-jvm:0.0.2'
+                api 'com.lightningkite:kommunicate-jvm:0.0.2'
+                api 'com.lightningkite:mirror-archive-api-jvm:0.0.2'
             }
         }
         jvmTest {
@@ -90,10 +90,10 @@ kotlin {
             dependencies {
                 api 'org.jetbrains.kotlin:kotlin-stdlib-js'
                 api "org.jetbrains.kotlinx:kotlinx-io-js:0.1.1"
-                api "com.lightningkite:kommon-js:${project.version}"
-                api "com.lightningkite:mirror-runtime-js:${project.version}"
-                api "com.lightningkite:kommunicate-js:${project.version}"
-                api "com.lightningkite:mirror-archive-api-js:${project.version}"
+                api 'com.lightningkite:kommon-js:0.0.2'
+                api 'com.lightningkite:mirror-runtime-js:0.0.2'
+                api 'com.lightningkite:kommunicate-js:0.0.2'
+                api 'com.lightningkite:mirror-archive-api-js:0.0.2'
             }
         }
         jsTest {

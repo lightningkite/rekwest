@@ -74,12 +74,12 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     testCompile "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
     compile project(':rekwest-client')
-    api "com.lightningkite:kommon-jvm:${project.version}"
-    api "com.lightningkite:mirror-runtime-jvm:${project.version}"
-    api "com.lightningkite:mirror-archive-api-jvm:${project.version}"
+    api 'com.lightningkite:kommon-jvm:0.0.2'
+    api 'com.lightningkite:mirror-runtime-jvm:0.0.2'
+    api 'com.lightningkite:mirror-archive-api-jvm:0.0.2'
 
-    testApi "com.lightningkite:lokalize-jvm:${project.version}"
-    testApi "com.lightningkite:kommon-jvm:${project.version}"
+    testApi 'com.lightningkite:lokalize-jvm:0.0.2'
+    testApi 'com.lightningkite:kommon-jvm:0.0.2'
 
     testApi 'junit:junit:4.12'
     testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
