@@ -1,2 +1,4 @@
 include ':rekwest-client'
 include ':rekwest-server'
+
+enableFeaturePreview('GRADLE_METADATA')
