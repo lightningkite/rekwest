@@ -28,15 +28,13 @@ object UserClassInfo: ClassInfo<User> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<User>? = null
 
-   object Fields {
-       val id = FieldInfo<User, Id>(UserClassInfo, "id", Type<Id>(Id::class, listOf(), false), true, { it.id as Id}, listOf())
-        val email = FieldInfo<User, String>(UserClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf(AnnotationInfo("@Indexed", listOf())))
-        val password = FieldInfo<User, String>(UserClassInfo, "password", Type<String>(String::class, listOf(), false), false, { it.password as String}, listOf())
-        val role = FieldInfo<User, User.Role>(UserClassInfo, "role", Type<User.Role>(User.Role::class, listOf(), false), true, { it.role as User.Role}, listOf())
-        val rejectTokensBefore = FieldInfo<User, TimeStamp>(UserClassInfo, "rejectTokensBefore", Type<TimeStamp>(TimeStamp::class, listOf(), false), true, { it.rejectTokensBefore as TimeStamp}, listOf())
-   }
+   val fieldId = FieldInfo<User, Id>(this, "id", Type<Id>(Id::class, listOf(), false), true, { it.id as Id}, listOf())
+    val fieldEmail = FieldInfo<User, String>(this, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf(AnnotationInfo("@Indexed", listOf())))
+    val fieldPassword = FieldInfo<User, String>(this, "password", Type<String>(String::class, listOf(), false), false, { it.password as String}, listOf())
+    val fieldRole = FieldInfo<User, User.Role>(this, "role", Type<User.Role>(User.Role::class, listOf(), false), true, { it.role as User.Role}, listOf())
+    val fieldRejectTokensBefore = FieldInfo<User, TimeStamp>(this, "rejectTokensBefore", Type<TimeStamp>(TimeStamp::class, listOf(), false), true, { it.rejectTokensBefore as TimeStamp}, listOf())
 
-   override val fields:List<FieldInfo<User, *>> = listOf(Fields.id, Fields.email, Fields.password, Fields.role, Fields.rejectTokensBefore)
+   override val fields:List<FieldInfo<User, *>> = listOf(fieldId, fieldEmail, fieldPassword, fieldRole, fieldRejectTokensBefore)
 
    override fun construct(map: Map<String, Any?>): User {
        //Gather variables

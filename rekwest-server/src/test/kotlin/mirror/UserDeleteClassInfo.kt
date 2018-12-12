@@ -28,11 +28,9 @@ object UserDeleteClassInfo: ClassInfo<User.Delete> {
    override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@Mutates", listOf()), AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)))
    override val enumValues: List<User.Delete>? = null
 
-   object Fields {
-       val id = FieldInfo<User.Delete, Reference<User>>(UserDeleteClassInfo, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
-   }
+   val fieldId = FieldInfo<User.Delete, Reference<User>>(this, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
 
-   override val fields:List<FieldInfo<User.Delete, *>> = listOf(Fields.id)
+   override val fields:List<FieldInfo<User.Delete, *>> = listOf(fieldId)
 
    override fun construct(map: Map<String, Any?>): User.Delete {
        //Gather variables

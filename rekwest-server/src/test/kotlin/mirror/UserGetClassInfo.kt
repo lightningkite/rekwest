@@ -28,11 +28,9 @@ object UserGetClassInfo: ClassInfo<User.Get> {
    override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.NoSuchElementException)))
    override val enumValues: List<User.Get>? = null
 
-   object Fields {
-       val id = FieldInfo<User.Get, Reference<User>>(UserGetClassInfo, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
-   }
+   val fieldId = FieldInfo<User.Get, Reference<User>>(this, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
 
-   override val fields:List<FieldInfo<User.Get, *>> = listOf(Fields.id)
+   override val fields:List<FieldInfo<User.Get, *>> = listOf(fieldId)
 
    override fun construct(map: Map<String, Any?>): User.Get {
        //Gather variables

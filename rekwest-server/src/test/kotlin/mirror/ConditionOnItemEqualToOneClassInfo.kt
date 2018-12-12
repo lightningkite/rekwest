@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object ConditionOnItemEqualToOneClassInfo: ClassInfo<ConditionOnItem.EqualToOne<
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ConditionOnItem.EqualToOne<*,*>>? = null
 
-   object Fields {
-       val field = FieldInfo<ConditionOnItem.EqualToOne<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(ConditionOnItemEqualToOneClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>}, listOf())
-        val values = FieldInfo<ConditionOnItem.EqualToOne<*,*>, kotlin.collections.Collection<Any?>>(ConditionOnItemEqualToOneClassInfo, "values", Type<kotlin.collections.Collection<Any?>>(kotlin.collections.Collection::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.values as kotlin.collections.Collection<Any?>}, listOf())
-   }
+   val fieldField = FieldInfo<ConditionOnItem.EqualToOne<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(this, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>}, listOf())
+    val fieldValues = FieldInfo<ConditionOnItem.EqualToOne<*,*>, kotlin.collections.Collection<Any?>>(this, "values", Type<kotlin.collections.Collection<Any?>>(kotlin.collections.Collection::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.values as kotlin.collections.Collection<Any?>}, listOf())
 
-   override val fields:List<FieldInfo<ConditionOnItem.EqualToOne<*,*>, *>> = listOf(Fields.field, Fields.values)
+   override val fields:List<FieldInfo<ConditionOnItem.EqualToOne<*,*>, *>> = listOf(fieldField, fieldValues)
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.EqualToOne<kotlin.Any, Any?> {
        //Gather variables

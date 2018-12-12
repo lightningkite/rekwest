@@ -39,18 +39,18 @@ object UserTable : PropertySecureTable<User>(
     }
 
     val passwordRules = HashedFieldRules(
-            variable = UserClassInfo.Fields.password,
+            variable = UserClassInfo.fieldPassword,
             getIdentifiers = { listOf(it.email) },
             atLeastEntropy = { 5 }
     )
     val emailRules = object : PropertyRules<User, String> {
-        override val variable: FieldInfo<User, String> = UserClassInfo.Fields.email
+        override val variable: FieldInfo<User, String> = UserClassInfo.fieldEmail
         override suspend fun query(untypedUser: Any?) {}
         override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: User) = currentState.email
         override suspend fun write(untypedUser: Any?, currentState: User?, newState: String): String {
             //Make sure emails are unique
             val existing = Transaction(null, false, true).use {
-                underlying.queryOne(it, ConditionOnItem.Equal(UserClassInfo.Fields.email, newState))
+                underlying.queryOne(it, ConditionOnItem.Equal(UserClassInfo.fieldEmail, newState))
             }
             if (existing != null) throw ElementAlreadyExistsException("A user already exists with the email $newState.")
             return newState
@@ -58,7 +58,7 @@ object UserTable : PropertySecureTable<User>(
 
     }
     val roleRules = object : PropertyRules<User, User.Role> {
-        override val variable: FieldInfo<User, User.Role> = UserClassInfo.Fields.role
+        override val variable: FieldInfo<User, User.Role> = UserClassInfo.fieldRole
         override suspend fun query(untypedUser: Any?) {}
         override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: User) = currentState.role
         override suspend fun write(untypedUser: Any?, currentState: User?, newState: User.Role): User.Role {
@@ -108,7 +108,7 @@ object UserTable : PropertySecureTable<User>(
         User.Login::class.invocation = {
             val raw = underlying.queryOne(
                     transaction = it,
-                    condition = ConditionOnItem.Equal(UserClassInfo.Fields.email, email)
+                    condition = ConditionOnItem.Equal(UserClassInfo.fieldEmail, email)
             ) ?: throw NoSuchElementException()
             if (passwordRules.check(raw, password)) {
                 User.Session(
@@ -122,14 +122,14 @@ object UserTable : PropertySecureTable<User>(
         User.ResetPassword::class.invocation = {
             val raw = underlying.queryOne(
                     transaction = it,
-                    condition = ConditionOnItem.Equal(UserClassInfo.Fields.email, email)
+                    condition = ConditionOnItem.Equal(UserClassInfo.fieldEmail, email)
             ) ?: throw NoSuchElementException()
             val newPassword = (1..20).joinToString("") { ('a'..'z').random().toString() }
             modify(
                     transaction = it,
-                    id = raw.id!!,
+                    id = raw.id,
                     modifications = listOf(
-                            ModificationOnItem.Set(UserClassInfo.Fields.password, newPassword)
+                            ModificationOnItem.Set(UserClassInfo.fieldPassword, newPassword)
                     )
             )
 //            Email.send(

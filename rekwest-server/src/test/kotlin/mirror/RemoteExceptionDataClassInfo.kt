@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.rekwest
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,22 +21,20 @@ object RemoteExceptionDataClassInfo: ClassInfo<RemoteExceptionData> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<RemoteExceptionData>? = null
 
-   object Fields {
-       val type = FieldInfo<RemoteExceptionData, kotlin.String>(RemoteExceptionDataClassInfo, "type", Type<kotlin.String>(kotlin.String::class, listOf(), false), true, { it.type as kotlin.String}, listOf())
-        val message = FieldInfo<RemoteExceptionData, kotlin.String>(RemoteExceptionDataClassInfo, "message", Type<kotlin.String>(kotlin.String::class, listOf(), false), true, { it.message as kotlin.String}, listOf())
-        val trace = FieldInfo<RemoteExceptionData, kotlin.String>(RemoteExceptionDataClassInfo, "trace", Type<kotlin.String>(kotlin.String::class, listOf(), false), true, { it.trace as kotlin.String}, listOf())
-        val data = FieldInfo<RemoteExceptionData, kotlin.Any?>(RemoteExceptionDataClassInfo, "data", Type<kotlin.Any?>(kotlin.Any::class, listOf(), true), true, { it.data as kotlin.Any?}, listOf())
-   }
+   val fieldType = FieldInfo<RemoteExceptionData, kotlin.String>(this, "type", Type<kotlin.String>(kotlin.String::class, listOf(), false), true, { it.type as kotlin.String}, listOf())
+    val fieldMessage = FieldInfo<RemoteExceptionData, kotlin.String>(this, "message", Type<kotlin.String>(kotlin.String::class, listOf(), false), true, { it.message as kotlin.String}, listOf())
+    val fieldTrace = FieldInfo<RemoteExceptionData, kotlin.String>(this, "trace", Type<kotlin.String>(kotlin.String::class, listOf(), false), true, { it.trace as kotlin.String}, listOf())
+    val fieldData = FieldInfo<RemoteExceptionData, kotlin.Any?>(this, "data", Type<kotlin.Any?>(kotlin.Any::class, listOf(), true), true, { it.data as kotlin.Any?}, listOf())
 
-   override val fields:List<FieldInfo<RemoteExceptionData, *>> = listOf(Fields.type, Fields.message, Fields.trace, Fields.data)
+   override val fields:List<FieldInfo<RemoteExceptionData, *>> = listOf(fieldType, fieldMessage, fieldTrace, fieldData)
 
    override fun construct(map: Map<String, Any?>): RemoteExceptionData {
        //Gather variables
        
            //Handle the optionals
-       val type:kotlin.String = map["type"] as? kotlin.String ?: (Fields.type.get(RemoteExceptionData()) as kotlin.String)
-        val message:kotlin.String = map["message"] as? kotlin.String ?: (Fields.message.get(RemoteExceptionData(type = type)) as kotlin.String)
-        val trace:kotlin.String = map["trace"] as? kotlin.String ?: (Fields.trace.get(RemoteExceptionData(type = type, message = message)) as kotlin.String)
+       val type:kotlin.String = map["type"] as? kotlin.String ?: (fieldType.get(RemoteExceptionData()) as kotlin.String)
+        val message:kotlin.String = map["message"] as? kotlin.String ?: (fieldMessage.get(RemoteExceptionData(type = type)) as kotlin.String)
+        val trace:kotlin.String = map["trace"] as? kotlin.String ?: (fieldTrace.get(RemoteExceptionData(type = type, message = message)) as kotlin.String)
         val data:kotlin.Any? = map["data"] as kotlin.Any?
        //Finally do the call
        return RemoteExceptionData(

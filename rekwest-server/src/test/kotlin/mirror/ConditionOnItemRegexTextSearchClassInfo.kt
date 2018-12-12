@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object ConditionOnItemRegexTextSearchClassInfo: ClassInfo<ConditionOnItem.RegexT
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ConditionOnItem.RegexTextSearch<*,*>>? = null
 
-   object Fields {
-       val field = FieldInfo<ConditionOnItem.RegexTextSearch<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(ConditionOnItemRegexTextSearchClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>}, listOf())
-        val query = FieldInfo<ConditionOnItem.RegexTextSearch<*,*>, kotlin.text.Regex>(ConditionOnItemRegexTextSearchClassInfo, "query", Type<kotlin.text.Regex>(kotlin.text.Regex::class, listOf(), false), false, { it.query as kotlin.text.Regex}, listOf())
-   }
+   val fieldField = FieldInfo<ConditionOnItem.RegexTextSearch<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(this, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>}, listOf())
+    val fieldQuery = FieldInfo<ConditionOnItem.RegexTextSearch<*,*>, kotlin.text.Regex>(this, "query", Type<kotlin.text.Regex>(kotlin.text.Regex::class, listOf(), false), false, { it.query as kotlin.text.Regex}, listOf())
 
-   override val fields:List<FieldInfo<ConditionOnItem.RegexTextSearch<*,*>, *>> = listOf(Fields.field, Fields.query)
+   override val fields:List<FieldInfo<ConditionOnItem.RegexTextSearch<*,*>, *>> = listOf(fieldField, fieldQuery)
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.RegexTextSearch<kotlin.Any, kotlin.CharSequence> {
        //Gather variables

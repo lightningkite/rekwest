@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object ConditionOnItemTextSearchClassInfo: ClassInfo<ConditionOnItem.TextSearch<
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ConditionOnItem.TextSearch<*,*>>? = null
 
-   object Fields {
-       val field = FieldInfo<ConditionOnItem.TextSearch<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(ConditionOnItemTextSearchClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>}, listOf())
-        val query = FieldInfo<ConditionOnItem.TextSearch<*,*>, kotlin.String>(ConditionOnItemTextSearchClassInfo, "query", Type<kotlin.String>(kotlin.String::class, listOf(), false), false, { it.query as kotlin.String}, listOf())
-   }
+   val fieldField = FieldInfo<ConditionOnItem.TextSearch<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(this, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.CharSequence>(kotlin.CharSequence::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.CharSequence>}, listOf())
+    val fieldQuery = FieldInfo<ConditionOnItem.TextSearch<*,*>, kotlin.String>(this, "query", Type<kotlin.String>(kotlin.String::class, listOf(), false), false, { it.query as kotlin.String}, listOf())
 
-   override val fields:List<FieldInfo<ConditionOnItem.TextSearch<*,*>, *>> = listOf(Fields.field, Fields.query)
+   override val fields:List<FieldInfo<ConditionOnItem.TextSearch<*,*>, *>> = listOf(fieldField, fieldQuery)
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.TextSearch<kotlin.Any, kotlin.CharSequence> {
        //Gather variables

@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.info
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,9 +21,7 @@ object TypeProjectionVarianceClassInfo: ClassInfo<TypeProjection.Variance> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<TypeProjection.Variance>? = listOf(TypeProjection.Variance.INVARIANT, TypeProjection.Variance.IN, TypeProjection.Variance.OUT, TypeProjection.Variance.STAR)
 
-   object Fields {
-       
-   }
+   
 
    override val fields:List<FieldInfo<TypeProjection.Variance, *>> = listOf()
 

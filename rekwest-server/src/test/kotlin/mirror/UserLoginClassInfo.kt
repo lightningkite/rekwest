@@ -28,12 +28,10 @@ object UserLoginClassInfo: ClassInfo<User.Login> {
    override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)))
    override val enumValues: List<User.Login>? = null
 
-   object Fields {
-       val email = FieldInfo<User.Login, String>(UserLoginClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf())
-        val password = FieldInfo<User.Login, String>(UserLoginClassInfo, "password", Type<String>(String::class, listOf(), false), false, { it.password as String}, listOf())
-   }
+   val fieldEmail = FieldInfo<User.Login, String>(this, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf())
+    val fieldPassword = FieldInfo<User.Login, String>(this, "password", Type<String>(String::class, listOf(), false), false, { it.password as String}, listOf())
 
-   override val fields:List<FieldInfo<User.Login, *>> = listOf(Fields.email, Fields.password)
+   override val fields:List<FieldInfo<User.Login, *>> = listOf(fieldEmail, fieldPassword)
 
    override fun construct(map: Map<String, Any?>): User.Login {
        //Gather variables

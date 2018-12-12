@@ -28,9 +28,7 @@ object UserRoleClassInfo: ClassInfo<User.Role> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<User.Role>? = listOf(User.Role.Admin, User.Role.Citizen)
 
-   object Fields {
-       
-   }
+   
 
    override val fields:List<FieldInfo<User.Role, *>> = listOf()
 

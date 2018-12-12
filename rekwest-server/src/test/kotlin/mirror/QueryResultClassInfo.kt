@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object QueryResultClassInfo: ClassInfo<QueryResult<*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<QueryResult<*>>? = null
 
-   object Fields {
-       val results = FieldInfo<QueryResult<*>, kotlin.collections.List<Any?>>(QueryResultClassInfo, "results", Type<kotlin.collections.List<Any?>>(kotlin.collections.List::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.results as kotlin.collections.List<Any?>}, listOf())
-        val continuationToken = FieldInfo<QueryResult<*>, kotlin.String?>(QueryResultClassInfo, "continuationToken", Type<kotlin.String?>(kotlin.String::class, listOf(), true), true, { it.continuationToken as kotlin.String?}, listOf())
-   }
+   val fieldResults = FieldInfo<QueryResult<*>, kotlin.collections.List<Any?>>(this, "results", Type<kotlin.collections.List<Any?>>(kotlin.collections.List::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.results as kotlin.collections.List<Any?>}, listOf())
+    val fieldContinuationToken = FieldInfo<QueryResult<*>, kotlin.String?>(this, "continuationToken", Type<kotlin.String?>(kotlin.String::class, listOf(), true), true, { it.continuationToken as kotlin.String?}, listOf())
 
-   override val fields:List<FieldInfo<QueryResult<*>, *>> = listOf(Fields.results, Fields.continuationToken)
+   override val fields:List<FieldInfo<QueryResult<*>, *>> = listOf(fieldResults, fieldContinuationToken)
 
    override fun construct(map: Map<String, Any?>): QueryResult<Any?> {
        //Gather variables

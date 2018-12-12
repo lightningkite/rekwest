@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object ConditionOnItemEqualClassInfo: ClassInfo<ConditionOnItem.Equal<*,*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ConditionOnItem.Equal<*,*>>? = null
 
-   object Fields {
-       val field = FieldInfo<ConditionOnItem.Equal<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(ConditionOnItemEqualClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>}, listOf())
-        val value = FieldInfo<ConditionOnItem.Equal<*,*>, Any?>(ConditionOnItemEqualClassInfo, "value", Type<Any?>(Any::class, listOf(), false), false, { it.value as Any?}, listOf())
-   }
+   val fieldField = FieldInfo<ConditionOnItem.Equal<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(this, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>}, listOf())
+    val fieldValue = FieldInfo<ConditionOnItem.Equal<*,*>, Any?>(this, "value", Type<Any?>(Any::class, listOf(), false), false, { it.value as Any?}, listOf())
 
-   override val fields:List<FieldInfo<ConditionOnItem.Equal<*,*>, *>> = listOf(Fields.field, Fields.value)
+   override val fields:List<FieldInfo<ConditionOnItem.Equal<*,*>, *>> = listOf(fieldField, fieldValue)
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.Equal<kotlin.Any, Any?> {
        //Gather variables

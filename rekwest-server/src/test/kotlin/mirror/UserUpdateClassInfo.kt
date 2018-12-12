@@ -28,11 +28,9 @@ object UserUpdateClassInfo: ClassInfo<User.Update> {
    override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@Mutates", listOf()), AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)))
    override val enumValues: List<User.Update>? = null
 
-   object Fields {
-       val value = FieldInfo<User.Update, User>(UserUpdateClassInfo, "value", Type<User>(User::class, listOf(), false), false, { it.value as User}, listOf())
-   }
+   val fieldValue = FieldInfo<User.Update, User>(this, "value", Type<User>(User::class, listOf(), false), false, { it.value as User}, listOf())
 
-   override val fields:List<FieldInfo<User.Update, *>> = listOf(Fields.value)
+   override val fields:List<FieldInfo<User.Update, *>> = listOf(fieldValue)
 
    override fun construct(map: Map<String, Any?>): User.Update {
        //Gather variables

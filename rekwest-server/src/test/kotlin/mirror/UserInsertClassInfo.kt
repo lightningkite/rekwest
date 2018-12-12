@@ -28,11 +28,9 @@ object UserInsertClassInfo: ClassInfo<User.Insert> {
    override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@Mutates", listOf()), AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException)))
    override val enumValues: List<User.Insert>? = null
 
-   object Fields {
-       val value = FieldInfo<User.Insert, User>(UserInsertClassInfo, "value", Type<User>(User::class, listOf(), false), false, { it.value as User}, listOf())
-   }
+   val fieldValue = FieldInfo<User.Insert, User>(this, "value", Type<User>(User::class, listOf(), false), false, { it.value as User}, listOf())
 
-   override val fields:List<FieldInfo<User.Insert, *>> = listOf(Fields.value)
+   override val fields:List<FieldInfo<User.Insert, *>> = listOf(fieldValue)
 
    override fun construct(map: Map<String, Any?>): User.Insert {
        //Gather variables

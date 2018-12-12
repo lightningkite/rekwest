@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,11 +21,9 @@ object ConditionOnItemOrClassInfo: ClassInfo<ConditionOnItem.Or<*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ConditionOnItem.Or<*>>? = null
 
-   object Fields {
-       val conditions = FieldInfo<ConditionOnItem.Or<*>, kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(ConditionOnItemOrClassInfo, "conditions", Type<kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(kotlin.collections.List::class, listOf(TypeProjection(Type<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(com.lightningkite.mirror.archive.ConditionOnItem::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.conditions as kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>}, listOf())
-   }
+   val fieldConditions = FieldInfo<ConditionOnItem.Or<*>, kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(this, "conditions", Type<kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>>(kotlin.collections.List::class, listOf(TypeProjection(Type<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(com.lightningkite.mirror.archive.ConditionOnItem::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.conditions as kotlin.collections.List<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>}, listOf())
 
-   override val fields:List<FieldInfo<ConditionOnItem.Or<*>, *>> = listOf(Fields.conditions)
+   override val fields:List<FieldInfo<ConditionOnItem.Or<*>, *>> = listOf(fieldConditions)
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.Or<kotlin.Any> {
        //Gather variables

@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.info
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,18 +21,16 @@ object AnnotationInfoClassInfo: ClassInfo<AnnotationInfo> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<AnnotationInfo>? = null
 
-   object Fields {
-       val name = FieldInfo<AnnotationInfo, kotlin.String>(AnnotationInfoClassInfo, "name", Type<kotlin.String>(kotlin.String::class, listOf(), false), false, { it.name as kotlin.String}, listOf())
-        val arguments = FieldInfo<AnnotationInfo, kotlin.collections.List<kotlin.Any>>(AnnotationInfoClassInfo, "arguments", Type<kotlin.collections.List<kotlin.Any>>(kotlin.collections.List::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), true, { it.arguments as kotlin.collections.List<kotlin.Any>}, listOf())
-   }
+   val fieldName = FieldInfo<AnnotationInfo, kotlin.String>(this, "name", Type<kotlin.String>(kotlin.String::class, listOf(), false), false, { it.name as kotlin.String}, listOf())
+    val fieldArguments = FieldInfo<AnnotationInfo, kotlin.collections.List<kotlin.Any>>(this, "arguments", Type<kotlin.collections.List<kotlin.Any>>(kotlin.collections.List::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), true, { it.arguments as kotlin.collections.List<kotlin.Any>}, listOf())
 
-   override val fields:List<FieldInfo<AnnotationInfo, *>> = listOf(Fields.name, Fields.arguments)
+   override val fields:List<FieldInfo<AnnotationInfo, *>> = listOf(fieldName, fieldArguments)
 
    override fun construct(map: Map<String, Any?>): AnnotationInfo {
        //Gather variables
        val name:kotlin.String = map["name"] as kotlin.String
            //Handle the optionals
-       val arguments:kotlin.collections.List<kotlin.Any> = map["arguments"] as? kotlin.collections.List<kotlin.Any> ?: (Fields.arguments.get(AnnotationInfo(name = name)) as kotlin.collections.List<kotlin.Any>)
+       val arguments:kotlin.collections.List<kotlin.Any> = map["arguments"] as? kotlin.collections.List<kotlin.Any> ?: (fieldArguments.get(AnnotationInfo(name = name)) as kotlin.collections.List<kotlin.Any>)
        //Finally do the call
        return AnnotationInfo(
            name = name,

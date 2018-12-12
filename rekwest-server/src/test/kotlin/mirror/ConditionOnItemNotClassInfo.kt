@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,11 +21,9 @@ object ConditionOnItemNotClassInfo: ClassInfo<ConditionOnItem.Not<*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ConditionOnItem.Not<*>>? = null
 
-   object Fields {
-       val condition = FieldInfo<ConditionOnItem.Not<*>, com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(ConditionOnItemNotClassInfo, "condition", Type<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(com.lightningkite.mirror.archive.ConditionOnItem::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.condition as com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>}, listOf())
-   }
+   val fieldCondition = FieldInfo<ConditionOnItem.Not<*>, com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(this, "condition", Type<com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>>(com.lightningkite.mirror.archive.ConditionOnItem::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.condition as com.lightningkite.mirror.archive.ConditionOnItem<kotlin.Any>}, listOf())
 
-   override val fields:List<FieldInfo<ConditionOnItem.Not<*>, *>> = listOf(Fields.condition)
+   override val fields:List<FieldInfo<ConditionOnItem.Not<*>, *>> = listOf(fieldCondition)
 
    override fun construct(map: Map<String, Any?>): ConditionOnItem.Not<kotlin.Any> {
        //Gather variables

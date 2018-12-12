@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,20 +21,18 @@ object SortOnItemClassInfo: ClassInfo<SortOnItem<*,*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<SortOnItem<*,*>>? = null
 
-   object Fields {
-       val field = FieldInfo<SortOnItem<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(SortOnItemClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Comparable<kotlin.Comparable<*>>>(kotlin.Comparable::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>}, listOf())
-        val ascending = FieldInfo<SortOnItem<*,*>, kotlin.Boolean>(SortOnItemClassInfo, "ascending", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.ascending as kotlin.Boolean}, listOf())
-        val nullsFirst = FieldInfo<SortOnItem<*,*>, kotlin.Boolean>(SortOnItemClassInfo, "nullsFirst", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.nullsFirst as kotlin.Boolean}, listOf())
-   }
+   val fieldField = FieldInfo<SortOnItem<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(this, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Comparable<kotlin.Comparable<*>>>(kotlin.Comparable::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>}, listOf())
+    val fieldAscending = FieldInfo<SortOnItem<*,*>, kotlin.Boolean>(this, "ascending", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.ascending as kotlin.Boolean}, listOf())
+    val fieldNullsFirst = FieldInfo<SortOnItem<*,*>, kotlin.Boolean>(this, "nullsFirst", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.nullsFirst as kotlin.Boolean}, listOf())
 
-   override val fields:List<FieldInfo<SortOnItem<*,*>, *>> = listOf(Fields.field, Fields.ascending, Fields.nullsFirst)
+   override val fields:List<FieldInfo<SortOnItem<*,*>, *>> = listOf(fieldField, fieldAscending, fieldNullsFirst)
 
    override fun construct(map: Map<String, Any?>): SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>> {
        //Gather variables
        val field:com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>> = map["field"] as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>
            //Handle the optionals
-       val ascending:kotlin.Boolean = map["ascending"] as? kotlin.Boolean ?: (Fields.ascending.get(SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(field = field)) as kotlin.Boolean)
-        val nullsFirst:kotlin.Boolean = map["nullsFirst"] as? kotlin.Boolean ?: (Fields.nullsFirst.get(SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(field = field, ascending = ascending)) as kotlin.Boolean)
+       val ascending:kotlin.Boolean = map["ascending"] as? kotlin.Boolean ?: (fieldAscending.get(SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(field = field)) as kotlin.Boolean)
+        val nullsFirst:kotlin.Boolean = map["nullsFirst"] as? kotlin.Boolean ?: (fieldNullsFirst.get(SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(field = field, ascending = ascending)) as kotlin.Boolean)
        //Finally do the call
        return SortOnItem<kotlin.Any, kotlin.Comparable<kotlin.Comparable<*>>>(
            field = field,

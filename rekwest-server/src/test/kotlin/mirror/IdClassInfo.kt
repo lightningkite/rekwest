@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object IdClassInfo: ClassInfo<Id> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<Id>? = null
 
-   object Fields {
-       val mostSignificantBits = FieldInfo<Id, kotlin.Long>(IdClassInfo, "mostSignificantBits", Type<kotlin.Long>(kotlin.Long::class, listOf(), false), false, { it.mostSignificantBits as kotlin.Long}, listOf())
-        val leastSignificantBits = FieldInfo<Id, kotlin.Long>(IdClassInfo, "leastSignificantBits", Type<kotlin.Long>(kotlin.Long::class, listOf(), false), false, { it.leastSignificantBits as kotlin.Long}, listOf())
-   }
+   val fieldMostSignificantBits = FieldInfo<Id, kotlin.Long>(this, "mostSignificantBits", Type<kotlin.Long>(kotlin.Long::class, listOf(), false), false, { it.mostSignificantBits as kotlin.Long}, listOf())
+    val fieldLeastSignificantBits = FieldInfo<Id, kotlin.Long>(this, "leastSignificantBits", Type<kotlin.Long>(kotlin.Long::class, listOf(), false), false, { it.leastSignificantBits as kotlin.Long}, listOf())
 
-   override val fields:List<FieldInfo<Id, *>> = listOf(Fields.mostSignificantBits, Fields.leastSignificantBits)
+   override val fields:List<FieldInfo<Id, *>> = listOf(fieldMostSignificantBits, fieldLeastSignificantBits)
 
    override fun construct(map: Map<String, Any?>): Id {
        //Gather variables

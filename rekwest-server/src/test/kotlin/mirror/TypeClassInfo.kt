@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.info
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,20 +21,18 @@ object TypeClassInfo: ClassInfo<Type<*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<Type<*>>? = null
 
-   object Fields {
-       val kClass = FieldInfo<Type<*>, kotlin.reflect.KClass<*>>(TypeClassInfo, "kClass", Type<kotlin.reflect.KClass<*>>(kotlin.reflect.KClass::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), false, { it.kClass as kotlin.reflect.KClass<*>}, listOf())
-        val typeParameters = FieldInfo<Type<*>, kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>>(TypeClassInfo, "typeParameters", Type<kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>>(kotlin.collections.List::class, listOf(TypeProjection(Type<com.lightningkite.mirror.info.TypeProjection>(com.lightningkite.mirror.info.TypeProjection::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), true, { it.typeParameters as kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>}, listOf())
-        val nullable = FieldInfo<Type<*>, kotlin.Boolean>(TypeClassInfo, "nullable", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.nullable as kotlin.Boolean}, listOf())
-   }
+   val fieldKClass = FieldInfo<Type<*>, kotlin.reflect.KClass<*>>(this, "kClass", Type<kotlin.reflect.KClass<*>>(kotlin.reflect.KClass::class, listOf(TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), false, { it.kClass as kotlin.reflect.KClass<*>}, listOf())
+    val fieldTypeParameters = FieldInfo<Type<*>, kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>>(this, "typeParameters", Type<kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>>(kotlin.collections.List::class, listOf(TypeProjection(Type<com.lightningkite.mirror.info.TypeProjection>(com.lightningkite.mirror.info.TypeProjection::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), true, { it.typeParameters as kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>}, listOf())
+    val fieldNullable = FieldInfo<Type<*>, kotlin.Boolean>(this, "nullable", Type<kotlin.Boolean>(kotlin.Boolean::class, listOf(), false), true, { it.nullable as kotlin.Boolean}, listOf())
 
-   override val fields:List<FieldInfo<Type<*>, *>> = listOf(Fields.kClass, Fields.typeParameters, Fields.nullable)
+   override val fields:List<FieldInfo<Type<*>, *>> = listOf(fieldKClass, fieldTypeParameters, fieldNullable)
 
    override fun construct(map: Map<String, Any?>): Type<Any?> {
        //Gather variables
        val kClass:kotlin.reflect.KClass<*> = map["kClass"] as kotlin.reflect.KClass<*>
            //Handle the optionals
-       val typeParameters:kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection> = map["typeParameters"] as? kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection> ?: (Fields.typeParameters.get(Type<Any?>(kClass = kClass)) as kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>)
-        val nullable:kotlin.Boolean = map["nullable"] as? kotlin.Boolean ?: (Fields.nullable.get(Type<Any?>(kClass = kClass, typeParameters = typeParameters)) as kotlin.Boolean)
+       val typeParameters:kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection> = map["typeParameters"] as? kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection> ?: (fieldTypeParameters.get(Type<Any?>(kClass = kClass)) as kotlin.collections.List<com.lightningkite.mirror.info.TypeProjection>)
+        val nullable:kotlin.Boolean = map["nullable"] as? kotlin.Boolean ?: (fieldNullable.get(Type<Any?>(kClass = kClass, typeParameters = typeParameters)) as kotlin.Boolean)
        //Finally do the call
        return Type<Any?>(
            kClass = kClass,

@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,11 +21,9 @@ object ReferenceClassInfo: ClassInfo<Reference<*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<Reference<*>>? = null
 
-   object Fields {
-       val id = FieldInfo<Reference<*>, com.lightningkite.mirror.archive.Id>(ReferenceClassInfo, "id", Type<com.lightningkite.mirror.archive.Id>(com.lightningkite.mirror.archive.Id::class, listOf(), false), false, { it.id as com.lightningkite.mirror.archive.Id}, listOf())
-   }
+   val fieldId = FieldInfo<Reference<*>, com.lightningkite.mirror.archive.Id>(this, "id", Type<com.lightningkite.mirror.archive.Id>(com.lightningkite.mirror.archive.Id::class, listOf(), false), false, { it.id as com.lightningkite.mirror.archive.Id}, listOf())
 
-   override val fields:List<FieldInfo<Reference<*>, *>> = listOf(Fields.id)
+   override val fields:List<FieldInfo<Reference<*>, *>> = listOf(fieldId)
 
    override fun construct(map: Map<String, Any?>): Reference<com.lightningkite.mirror.archive.HasId> {
        //Gather variables

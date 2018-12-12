@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,9 +21,7 @@ object ConditionOnItemAlwaysClassInfo: ClassInfo<ConditionOnItem.Always<*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ConditionOnItem.Always<*>>? = null
 
-   object Fields {
-       
-   }
+   
 
    override val fields:List<FieldInfo<ConditionOnItem.Always<*>, *>> = listOf()
 

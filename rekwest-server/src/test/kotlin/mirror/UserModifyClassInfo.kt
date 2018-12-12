@@ -28,12 +28,10 @@ object UserModifyClassInfo: ClassInfo<User.Modify> {
    override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@Mutates", listOf()), AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)))
    override val enumValues: List<User.Modify>? = null
 
-   object Fields {
-       val id = FieldInfo<User.Modify, Reference<User>>(UserModifyClassInfo, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
-        val modifications = FieldInfo<User.Modify, List<ModificationOnItem<User, *>>>(UserModifyClassInfo, "modifications", Type<List<ModificationOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<ModificationOnItem<User, *>>(ModificationOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.modifications as List<ModificationOnItem<User, *>>}, listOf())
-   }
+   val fieldId = FieldInfo<User.Modify, Reference<User>>(this, "id", Type<Reference<User>>(Reference::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.id as Reference<User>}, listOf())
+    val fieldModifications = FieldInfo<User.Modify, List<ModificationOnItem<User, *>>>(this, "modifications", Type<List<ModificationOnItem<User, *>>>(List::class, listOf(TypeProjection(Type<ModificationOnItem<User, *>>(ModificationOnItem::class, listOf(TypeProjection(Type<User>(User::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), true), TypeProjection.Variance.STAR)), false), TypeProjection.Variance.INVARIANT)), false), false, { it.modifications as List<ModificationOnItem<User, *>>}, listOf())
 
-   override val fields:List<FieldInfo<User.Modify, *>> = listOf(Fields.id, Fields.modifications)
+   override val fields:List<FieldInfo<User.Modify, *>> = listOf(fieldId, fieldModifications)
 
    override fun construct(map: Map<String, Any?>): User.Modify {
        //Gather variables

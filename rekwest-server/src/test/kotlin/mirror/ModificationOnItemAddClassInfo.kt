@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object ModificationOnItemAddClassInfo: ClassInfo<ModificationOnItem.Add<*,*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ModificationOnItem.Add<*,*>>? = null
 
-   object Fields {
-       val field = FieldInfo<ModificationOnItem.Add<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Number>>(ModificationOnItemAddClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Number>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Number>(kotlin.Number::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Number>}, listOf())
-        val amount = FieldInfo<ModificationOnItem.Add<*,*>, kotlin.Number>(ModificationOnItemAddClassInfo, "amount", Type<kotlin.Number>(kotlin.Number::class, listOf(), false), false, { it.amount as kotlin.Number}, listOf())
-   }
+   val fieldField = FieldInfo<ModificationOnItem.Add<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Number>>(this, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Number>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<kotlin.Number>(kotlin.Number::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, kotlin.Number>}, listOf())
+    val fieldAmount = FieldInfo<ModificationOnItem.Add<*,*>, kotlin.Number>(this, "amount", Type<kotlin.Number>(kotlin.Number::class, listOf(), false), false, { it.amount as kotlin.Number}, listOf())
 
-   override val fields:List<FieldInfo<ModificationOnItem.Add<*,*>, *>> = listOf(Fields.field, Fields.amount)
+   override val fields:List<FieldInfo<ModificationOnItem.Add<*,*>, *>> = listOf(fieldField, fieldAmount)
 
    override fun construct(map: Map<String, Any?>): ModificationOnItem.Add<kotlin.Any, kotlin.Number> {
        //Gather variables

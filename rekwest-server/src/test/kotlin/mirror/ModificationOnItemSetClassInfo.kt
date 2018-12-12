@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package com.lightningkite.mirror.archive
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,12 +21,10 @@ object ModificationOnItemSetClassInfo: ClassInfo<ModificationOnItem.Set<*,*>> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<ModificationOnItem.Set<*,*>>? = null
 
-   object Fields {
-       val field = FieldInfo<ModificationOnItem.Set<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(ModificationOnItemSetClassInfo, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>}, listOf())
-        val value = FieldInfo<ModificationOnItem.Set<*,*>, Any?>(ModificationOnItemSetClassInfo, "value", Type<Any?>(Any::class, listOf(), false), false, { it.value as Any?}, listOf())
-   }
+   val fieldField = FieldInfo<ModificationOnItem.Set<*,*>, com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(this, "field", Type<com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>>(com.lightningkite.mirror.info.FieldInfo::class, listOf(TypeProjection(Type<kotlin.Any>(kotlin.Any::class, listOf(), false), TypeProjection.Variance.INVARIANT), TypeProjection(Type<Any?>(Any::class, listOf(), false), TypeProjection.Variance.INVARIANT)), false), false, { it.field as com.lightningkite.mirror.info.FieldInfo<kotlin.Any, Any?>}, listOf())
+    val fieldValue = FieldInfo<ModificationOnItem.Set<*,*>, Any?>(this, "value", Type<Any?>(Any::class, listOf(), false), false, { it.value as Any?}, listOf())
 
-   override val fields:List<FieldInfo<ModificationOnItem.Set<*,*>, *>> = listOf(Fields.field, Fields.value)
+   override val fields:List<FieldInfo<ModificationOnItem.Set<*,*>, *>> = listOf(fieldField, fieldValue)
 
    override fun construct(map: Map<String, Any?>): ModificationOnItem.Set<kotlin.Any, Any?> {
        //Gather variables

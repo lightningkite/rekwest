@@ -28,11 +28,9 @@ object UserResetPasswordClassInfo: ClassInfo<User.ResetPassword> {
    override val annotations: List<AnnotationInfo> = listOf(AnnotationInfo("@ThrowsTypes", listOf(ExceptionNames.ForbiddenException, ExceptionNames.NoSuchElementException)))
    override val enumValues: List<User.ResetPassword>? = null
 
-   object Fields {
-       val email = FieldInfo<User.ResetPassword, String>(UserResetPasswordClassInfo, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf())
-   }
+   val fieldEmail = FieldInfo<User.ResetPassword, String>(this, "email", Type<String>(String::class, listOf(), false), false, { it.email as String}, listOf())
 
-   override val fields:List<FieldInfo<User.ResetPassword, *>> = listOf(Fields.email)
+   override val fields:List<FieldInfo<User.ResetPassword, *>> = listOf(fieldEmail)
 
    override fun construct(map: Map<String, Any?>): User.ResetPassword {
        //Gather variables

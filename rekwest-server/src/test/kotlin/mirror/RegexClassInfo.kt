@@ -2,7 +2,6 @@
 //AUTOMATICALLY GENERATED AND WILL BE OVERRIDDEN IF THIS MESSAGE IS PRESENT
 package mirror.kotlin.text
 
-
 import com.lightningkite.mirror.info.*
 import kotlin.reflect.KClass
 
@@ -22,11 +21,9 @@ object RegexClassInfo: ClassInfo<Regex> {
    override val annotations: List<AnnotationInfo> = listOf()
    override val enumValues: List<Regex>? = null
 
-   object Fields {
-       val pattern = FieldInfo<Regex, kotlin.String>(RegexClassInfo, "pattern", Type<kotlin.String>(kotlin.String::class, listOf(), false), false, { it.pattern as kotlin.String}, listOf())
-   }
+   val fieldPattern = FieldInfo<Regex, kotlin.String>(this, "pattern", Type<kotlin.String>(kotlin.String::class, listOf(), false), false, { it.pattern as kotlin.String}, listOf())
 
-   override val fields:List<FieldInfo<Regex, *>> = listOf(Fields.pattern)
+   override val fields:List<FieldInfo<Regex, *>> = listOf(fieldPattern)
 
    override fun construct(map: Map<String, Any?>): Regex {
        //Gather variables
