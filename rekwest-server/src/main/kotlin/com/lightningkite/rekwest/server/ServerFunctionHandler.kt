@@ -1,8 +1,6 @@
 package com.lightningkite.rekwest.server
 
 import com.lightningkite.kommon.exception.stackTraceString
-import com.lightningkite.mirror.archive.Transaction
-import com.lightningkite.mirror.archive.use
 import com.lightningkite.mirror.info.*
 import com.lightningkite.rekwest.RemoteExceptionData
 import com.lightningkite.rekwest.ServerFunction
@@ -14,7 +12,7 @@ import io.ktor.util.pipeline.ContextDsl
 import java.util.HashMap
 import kotlin.reflect.KClass
 
-class ServerFunctionHandler(
+class ServerFunctionHandler<USER>(
         val classInfoRegistry: ClassInfoRegistry
 ) {
 
@@ -24,9 +22,7 @@ class ServerFunctionHandler(
             try {
                 val sf = call.receive(ServerFunction::class.type)
                 try {
-                    val result = listOf(sf).transaction(call.unwrappedPrincipal()).use {
-                        sf.invoke(it)
-                    }
+                    val result = sf.invoke(call.unwrappedPrincipal<USER>())
                     @Suppress("UNCHECKED_CAST")
                     call.respond(sf::class.returnType as Type<Any?>, result)
                 } catch (e: Throwable) {
@@ -56,9 +52,8 @@ class ServerFunctionHandler(
             try {
                 val sfs = call.receive(ServerFunction::class.type.list)
                 try {
-                    val result = sfs.transaction(call.unwrappedPrincipal()).use { txn ->
-                        sfs.map { it.invoke(txn) }
-                    }
+                    val user = call.unwrappedPrincipal<USER>()
+                    val result = sfs.map { it.invoke(user) }
                     call.respond(Any::class.typeNullable.list, result)
                 } catch (e: Throwable) {
                     e.printStackTrace()
@@ -143,11 +138,11 @@ class ServerFunctionHandler(
             }
         }
 
-    private val KClassServerFunction_Invocation = HashMap<KClass<*>, suspend (Any, Transaction) -> Any?>()
+    private val KClassServerFunction_Invocation = HashMap<KClass<*>, suspend (Any, USER?) -> Any?>()
     @Suppress("UNCHECKED_CAST")
-    var <SF : ServerFunction<R>, R> KClass<SF>.invocation: suspend SF.(Transaction) -> R
+    var <SF : ServerFunction<R>, R> KClass<SF>.invocation: suspend SF.(USER?) -> R
         set(value) {
-            KClassServerFunction_Invocation[this] = value as suspend (Any, Transaction) -> Any?
+            KClassServerFunction_Invocation[this] = value as suspend (Any, USER?) -> Any?
         }
         get() {
             return KClassServerFunction_Invocation.getOrPut(this) {
@@ -158,18 +153,10 @@ class ServerFunctionHandler(
                         ?.mapNotNull { KClassServerFunction_Invocation[it.info.kClass] }
                         ?.firstOrNull()
                         ?: throw IllegalArgumentException("No invocation could be found for the server function type $this")
-            } as suspend SF.(Transaction) -> R
+            } as suspend SF.(USER?) -> R
         }
 
     @Suppress("UNCHECKED_CAST")
-    suspend operator fun <R> ServerFunction<R>.invoke(transaction: Transaction): R = KClassServerFunction_Invocation[this::class]!!.invoke(this, transaction) as R
+    suspend operator fun <R> ServerFunction<R>.invoke(user: USER?): R = KClassServerFunction_Invocation[this::class]!!.invoke(this, user) as R
 
-    fun List<ServerFunction<*>>.transaction(untypedUser: Any?): Transaction = Transaction(
-            untypedUser = untypedUser,
-            atomic = any { it::class.requiresAtomicTransaction },
-            readOnly = none { it::class.requiresWrite }
-    )
-
-    @Suppress("UNCHECKED_CAST")
-    suspend fun <R> ServerFunction<R>.invokeWithUser(untypedUser: Any?): R = invoke(listOf(this).transaction(untypedUser))
 }

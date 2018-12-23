@@ -7,15 +7,15 @@ import org.junit.Test
 
 class HashTest {
 
-    @Test fun test(){
+    @Test
+    fun test() {
 
         val testUser = User(email = "test@test.com", password = "please hash me")
 
         runBlocking {
-            Transaction(null, false, false).use{
-                val result = UserTable.insert(it, testUser.copy())
-                assert(result.password != testUser.password)
-            }
+            val result = UserTable.insert(testUser.copy())
+            assert(result.password != testUser.password)
+
         }
     }
 }

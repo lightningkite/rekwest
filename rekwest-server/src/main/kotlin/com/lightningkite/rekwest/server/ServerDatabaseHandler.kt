@@ -12,35 +12,27 @@ import io.ktor.routing.*
 import io.ktor.util.flattenEntries
 import io.ktor.util.pipeline.ContextDsl
 
-class ServerDatabaseHandler(
+class ServerDatabaseHandler<USER>(
         val classInfoRegistry: SerializationRegistry,
-        val tables: List<ImmutableDatabase.Table<*>>
+        val tableResolvers: List<(USER)->ImmutableDatabase.Table<*>>
 ) {
     val json = JsonSerializer(classInfoRegistry)
 
     @ContextDsl
     fun Route.tables() {
-        for (table in tables) {
-            when (table) {
-                is Database.Table -> databaseTable(table)
-                is Datalog.Table -> datalogTable(table)
-                else -> immutableDatabaseTable(table)
-            }
+        for (tableResolver in tableResolvers) {
+            databaseTable(tableResolver)
         }
     }
 
     @ContextDsl
-    fun Route.databaseTable(table: Database.Table<*>) {
-        @Suppress("UNCHECKED_CAST") val untypedTable = table as Database.Table<HasId>
-        datalogTable(table)
-
+    fun Route.databaseTable(table: (USER)->Database.Table<*>) {
         put(table.classInfo.localName + "/{id}"){ _ ->
+            val resolved = table.
             val id = call.parameters["id"]?.let{ Id.fromUUIDString(it) } ?: throw IllegalArgumentException("You need to supply an ID.")
             val input = call.receive(table.classInfo.type)
             assert(id == input.id)
-            val result = Transaction(call.unwrappedPrincipal()).use { txn ->
-                untypedTable.update(txn, input)
-            }
+            val result = untypedTable.update(input)
             call.respond(
                     status = HttpStatusCode.OK,
                     type = table.classInfo.typeNullable,
@@ -51,9 +43,7 @@ class ServerDatabaseHandler(
         patch(table.classInfo.localName + "/{id}"){ _ ->
             val id = call.parameters["id"]?.let{ Id.fromUUIDString(it) } ?: throw IllegalArgumentException("You need to supply an ID.")
             val input = call.receive(table.classInfo.type.modification.list)
-            val result = Transaction(call.unwrappedPrincipal()).use { txn ->
-                untypedTable.modify(txn, id, input)
-            }
+            val result = untypedTable.modify(id, input)
             call.respond(
                     status = HttpStatusCode.OK,
                     type = table.classInfo.type,
@@ -63,9 +53,7 @@ class ServerDatabaseHandler(
 
         delete(table.classInfo.localName + "/{id}"){ _ ->
             val id = call.parameters["id"]?.let{ Id.fromUUIDString(it) } ?: throw IllegalArgumentException("You need to supply an ID.")
-            val result = Transaction(call.unwrappedPrincipal()).use { txn ->
-                untypedTable.delete(txn, id)
-            }
+            val result = untypedTable.delete(id)
             call.respond(
                     status = HttpStatusCode.OK,
                     type = Unit::class.type,
@@ -81,9 +69,7 @@ class ServerDatabaseHandler(
 
         post(table.classInfo.localName) { _ ->
             val input = call.receive(table.classInfo.type)
-            val result = Transaction(call.unwrappedPrincipal()).use { txn ->
-                untypedTable.insert(txn, input)
-            }
+            val result = untypedTable.insert(input)
             call.respond(
                     status = HttpStatusCode.OK,
                     type = table.classInfo.type,
@@ -93,9 +79,7 @@ class ServerDatabaseHandler(
 
         post(table.classInfo.localName + "/bulk") { _ ->
             val input = call.receive(table.classInfo.type.list)
-            val result = Transaction(call.unwrappedPrincipal()).use { txn ->
-                untypedTable.insertMany(txn, input)
-            }
+            val result = untypedTable.insertMany(input)
             call.respond(
                     status = HttpStatusCode.OK,
                     type = table.classInfo.type.list,
@@ -148,9 +132,7 @@ class ServerDatabaseHandler(
                                 ConditionOnItem.And(it)
                             }
 
-            val results = Transaction(call.unwrappedPrincipal()).use { txn ->
-                untypedTable.query(txn, condition, sortedBy, continuationToken, count)
-            }
+            val results = untypedTable.query(condition, sortedBy, continuationToken, count)
             call.respond(
                     status = HttpStatusCode.OK,
                     type = table.classInfo.type.queryResult,
@@ -160,9 +142,7 @@ class ServerDatabaseHandler(
 
         get(table.classInfo.localName + "/{id}"){ _ ->
             val id = call.parameters["id"]?.let{ Id.fromUUIDString(it) } ?: throw IllegalArgumentException("You need to supply an ID.")
-            val result = Transaction(call.unwrappedPrincipal()).use { txn ->
-                untypedTable.getSure(txn, id)
-            }
+            val result = untypedTable.getSure(id)
             call.respond(
                     status = HttpStatusCode.OK,
                     type = table.classInfo.type,

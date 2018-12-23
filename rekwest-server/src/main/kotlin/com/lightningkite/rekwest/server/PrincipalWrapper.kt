@@ -6,4 +6,5 @@ import io.ktor.auth.principal
 
 data class PrincipalWrapper<T>(val wraps: T): Principal
 
-fun <T> ApplicationCall.unwrappedPrincipal(): T? = this.principal<PrincipalWrapper<T>>()?.wraps
+@Suppress("UNCHECKED_CAST")
+fun <T> ApplicationCall.unwrappedPrincipal(): T? = this.principal<PrincipalWrapper<*>>()?.wraps as? T

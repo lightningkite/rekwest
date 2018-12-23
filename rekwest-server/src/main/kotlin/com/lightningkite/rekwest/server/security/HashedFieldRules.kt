@@ -9,11 +9,11 @@ import me.gosimple.nbvcxz.resources.ConfigurationBuilder
 import me.gosimple.nbvcxz.resources.DictionaryBuilder
 import java.lang.IllegalArgumentException
 
-class HashedFieldRules<T : HasId>(
+class HashedFieldRules<T : HasId, USER>(
         override val variable: FieldInfo<T, String>,
         val getIdentifiers: (T)->List<String>,
         val atLeastEntropy: (T?)->Int = { 30 /*Takes roughly a billion guesses*/ }
-) : PropertySecureTable.PropertyRules<T, String> {
+) : PropertySecureTable.PropertyRules<T, String, USER> {
 
     val hasher = Argon2Factory.create()
 
@@ -22,13 +22,13 @@ class HashedFieldRules<T : HasId>(
         const val HASHED_PLACEHOLDER = "<password>"
     }
 
-    override suspend fun query(untypedUser: Any?) { throw IllegalAccessException() }
+    override suspend fun query(user: USER?) { throw IllegalAccessException() }
 
-    override suspend fun read(untypedUser: Any?, justInserted: Boolean, currentState: T): String {
+    override suspend fun read(user: USER?, justInserted: Boolean, currentState: T): String {
         return HASHED_PLACEHOLDER
     }
 
-    override suspend fun write(untypedUser: Any?, currentState: T?, newState: String): String {
+    override suspend fun write(user: USER?, currentState: T?, newState: String): String {
         if(newState.startsWith(HASHED_PREFIX)) return newState
         if(newState.equals(HASHED_PLACEHOLDER)) return currentState?.let { variable.get(it) } ?: throw IllegalArgumentException()
         judgePassword(currentState, newState)
