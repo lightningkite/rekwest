@@ -32,7 +32,7 @@ import kotlin.test.assertEquals
 class ExceptionThrownTest {
 
     val registry = DefaultRegistry + TestRegistry
-    val handler = ServerFunctionHandler(registry.classInfoRegistry)
+    val handler = ServerFunctionHandler<Any>(registry.classInfoRegistry)
     val serializer = JsonSerializer(registry)
 
     init{

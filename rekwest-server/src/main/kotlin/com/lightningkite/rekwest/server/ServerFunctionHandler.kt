@@ -41,6 +41,16 @@ class ServerFunctionHandler<USER>(
                 }
             } catch (e: Throwable) {
                 e.printStackTrace()
+                call.respond(
+                        status = HttpStatusCode.InternalServerError,
+                        type = RemoteExceptionData::class.type,
+                        value = RemoteExceptionData(
+                                type = e.javaClass.simpleName,
+                                message = e.message ?: "",
+                                trace = if (suppressStackTrace) "" else e.stackTraceString(),
+                                data = null
+                        )
+                )
             }
         }
 
@@ -71,6 +81,16 @@ class ServerFunctionHandler<USER>(
                 }
             } catch (e: Throwable) {
                 e.printStackTrace()
+                call.respond(
+                        status = HttpStatusCode.InternalServerError,
+                        type = RemoteExceptionData::class.type,
+                        value = RemoteExceptionData(
+                                type = e.javaClass.simpleName,
+                                message = e.message ?: "",
+                                trace = if (suppressStackTrace) "" else e.stackTraceString(),
+                                data = null
+                        )
+                )
             }
         }
 
@@ -80,9 +100,9 @@ class ServerFunctionHandler<USER>(
     val KClass<out ServerFunction<*>>.returnType: Type<*>
         get() {
             return KClassServerFunction_Returns.getOrPut(this) {
-                classInfoRegistry.getOrThrow(this)
+                (classInfoRegistry.getOrThrow(this)
                         .allImplements(classInfoRegistry)
-                        .find { it.kClass == ServerFunction::class }!!
+                        .find { it.kClass == ServerFunction::class } ?: throw IllegalArgumentException("${this} does not appear to be a server function"))
                         .typeParameters.first().type
             }
         }
@@ -155,6 +175,11 @@ class ServerFunctionHandler<USER>(
                         ?: throw IllegalArgumentException("No invocation could be found for the server function type $this")
             } as suspend SF.(USER?) -> R
         }
+
+    @Suppress("UNCHECKED_CAST")
+    fun <SF : ServerFunction<R>, R> invocation(forKclass: KClass<SF>, action: suspend SF.(USER?) -> R) {
+        KClassServerFunction_Invocation[forKclass] = action as suspend (Any, USER?) -> Any?
+    }
 
     @Suppress("UNCHECKED_CAST")
     suspend operator fun <R> ServerFunction<R>.invoke(user: USER?): R = KClassServerFunction_Invocation[this::class]!!.invoke(this, user) as R
